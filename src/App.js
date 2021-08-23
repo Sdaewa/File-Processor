@@ -1,12 +1,14 @@
 import React from "react";
-import AppBar from "@material-ui/core/AppBar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Grid from "@material-ui/core/Grid";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
+import {
+  AppBar,
+  Button,
+  CssBaseline,
+  Container,
+  Grid,
+  Toolbar,
+  Typography,
+} from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
 
 const useStyles = makeStyles((theme) => ({
   footer: {
@@ -30,7 +32,11 @@ const App = () => {
         </Toolbar>
       </AppBar>
       <main>
-        <div>Compressor here</div>
+        <Container maxWidth="lg">
+          <Grid container>
+            <Grid item></Grid>
+          </Grid>
+        </Container>
       </main>
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>
