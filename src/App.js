@@ -10,6 +10,8 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
+import DragNDrop from "./Components/DragNDrop";
+
 const useStyles = makeStyles((theme) => ({
   footer: {
     backgroundColor: theme.palette.background.paper,
@@ -24,7 +26,11 @@ const App = () => {
   return (
     <>
       <CssBaseline />
-      <AppBar position="relative">
+      <AppBar
+        style={{
+          alignItems: "center",
+          position: "static",
+        }}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
             File compressor
@@ -34,7 +40,13 @@ const App = () => {
       <main>
         <Container maxWidth="lg">
           <Grid container>
-            <Grid item></Grid>
+            <Grid item>
+              <DragNDrop />
+            </Grid>
+          </Grid>
+
+          <Grid container>
+            <Grid item>Pack</Grid>
           </Grid>
         </Container>
       </main>
