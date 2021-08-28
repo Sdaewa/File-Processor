@@ -27,18 +27,58 @@ const FileUpload = ({
   const fileInputField = useRef(null);
   const [files, setFiles] = useState({});
 
+  const handleUploadBtn = () => {
+    fileInputField.current.click();
+  };
+
+  const addNewFiles = (newFiles) => {
+    for (let file of newFiles) {
+      if (file.size <= maxFileSizeInBytes) {
+        if (!otherProps.multiple) {
+          return { file };
+        }
+        files[file.name] = file;
+      }
+    }
+    return { ...files };
+  };
+
+  const convertNestedObjectToArray = (nestedObj) =>
+    Object.keys(nestedObj).map((key) => nestedObj[key]);
+
+  const callUpdateFilesCb = (files) => {
+    const filesAsArray = convertNestedObjectToArray(files);
+    updateFilesCb(filesAsArray);
+  };
+
+  const removeFile = (fileName) => {
+    delete files[fileName];
+    setFiles({ ...files });
+    callUpdateFilesCb({ ...files });
+  };
+
+  const handleNewUpload = (e) => {
+    const { files: newFiles } = e.target;
+    if (newFiles.length) {
+      let updatedFiles = addNewFiles(newFiles);
+      setFiles(updatedFiles);
+      callUpdateFilesCb(updatedFiles);
+    }
+  };
+
   return (
     <>
       <FileUploadContainer>
         <InputLabel>{label}</InputLabel>
         <DragDropText>Drag and drop your files anywhere or</DragDropText>
-        <UploadFileBtn type="button">
+        <UploadFileBtn type="button" onClick={handleUploadBtn}>
           <i className="fas fa-file-upload" />
           <span> Upload {otherProps.multiple ? "files" : "a file"}</span>
         </UploadFileBtn>
         <FormField
           type="file"
           ref={fileInputField}
+          onChange={handleNewUpload}
           title=""
           value=""
           {...otherProps}
@@ -63,7 +103,10 @@ const FileUpload = ({
                     <span>{file.name}</span>
                     <aside>
                       <span>{convertBytesToKB(file.size)} kb</span>
-                      <RemoveFileIcon className="fas fa-trash-alt" />
+                      <RemoveFileIcon
+                        className="fas fa-trash-alt"
+                        onClick={() => removeFile(fileName)}
+                      />
                     </aside>
                   </FileMetaData>
                 </div>
