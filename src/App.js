@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   AppBar,
   Button,
@@ -23,8 +23,16 @@ const useStyles = makeStyles((theme) => ({
 const App = () => {
   const classes = useStyles();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
+  const [newInfo, setNewInfo] = useState({
+    files: [],
+  });
+
+  const updateUploadedFiles = (files) =>
+    setNewInfo({ ...newInfo, files: files });
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    //logic to create new user...
   };
 
   return (
@@ -43,18 +51,19 @@ const App = () => {
       </AppBar>
       <main>
         <Container maxWidth="lg">
-          <Grid container>
-            <Grid item>
-              <form onSubmit={handleSubmit}>
+          <form onSubmit={handleSubmit}>
+            <Grid container>
+              <Grid item>
                 <FileUpload
                   accept=".jpg,.png,.jpeg, .pdf"
                   label="Drop area"
+                  updateFilesCb={updateUploadedFiles}
                   multiple
                 />
-              </form>
+              </Grid>
+              <button type="submit">Submit</button>
             </Grid>
-            <button type="submit">Create New User</button>
-          </Grid>
+          </form>
 
           <Grid container>
             <Grid item>Pack</Grid>
