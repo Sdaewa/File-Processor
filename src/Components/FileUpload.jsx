@@ -89,17 +89,17 @@ const FileUpload = ({
         <PreviewList>
           {Object.keys(files).map((fileName, index) => {
             let file = files[fileName];
-            let isImageFile = file.type.split("/")[0] === "image";
+            console.log(file);
+
             return (
               <PreviewContainer key={fileName}>
                 <div>
-                  {isImageFile && (
-                    <ImagePreview
-                      src={URL.createObjectURL(file)}
-                      alt={`file preview ${index}`}
-                    />
-                  )}
-                  <FileMetaData isImageFile={isImageFile}>
+                  <ImagePreview
+                    src={URL.createObjectURL(file)}
+                    alt={`file preview ${index}`}
+                  />
+
+                  <FileMetaData>
                     <span>{file.name}</span>
                     <aside>
                       <span>{convertBytesToKB(file.size)} kb</span>
