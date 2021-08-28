@@ -10,7 +10,7 @@ import {
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 
-import Uploader from "./Components/Uploader";
+import FileUpload from "./Components/FileUpload";
 
 const useStyles = makeStyles((theme) => ({
   footer: {
@@ -41,7 +41,7 @@ const App = () => {
         <Container maxWidth="lg">
           <Grid container>
             <Grid item>
-              <Uploader />
+              <FileUpload />
             </Grid>
           </Grid>
 
