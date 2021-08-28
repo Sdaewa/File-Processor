@@ -52,17 +52,14 @@ const App = () => {
       <main>
         <Container maxWidth="lg">
           <form onSubmit={handleSubmit}>
-            <Grid container>
-              <Grid item>
-                <FileUpload
-                  accept=".jpg,.png,.jpeg, .pdf"
-                  label="Drop area"
-                  updateFilesCb={updateUploadedFiles}
-                  multiple
-                />
-              </Grid>
-              <button type="submit">Submit</button>
-            </Grid>
+            <FileUpload
+              accept=".jpg,.png,.jpeg, .pdf"
+              label="Drop area"
+              updateFilesCb={updateUploadedFiles}
+              multiple
+            />
+
+            <button type="submit">Submit</button>
           </form>
 
           <Grid container>
