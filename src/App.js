@@ -23,6 +23,10 @@ const useStyles = makeStyles((theme) => ({
 const App = () => {
   const classes = useStyles();
 
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  };
+
   return (
     <>
       <CssBaseline />
@@ -41,8 +45,15 @@ const App = () => {
         <Container maxWidth="lg">
           <Grid container>
             <Grid item>
-              <FileUpload />
+              <form onSubmit={handleSubmit}>
+                <FileUpload
+                  accept=".jpg,.png,.jpeg, .pdf"
+                  label="Drop area"
+                  multiple
+                />
+              </form>
             </Grid>
+            <button type="submit">Create New User</button>
           </Grid>
 
           <Grid container>
