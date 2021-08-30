@@ -93,7 +93,7 @@ const FileUpload = ({
 
   return (
     <>
-      <Container className={classes.fileUploadContainer}>
+      <section className={classes.fileUploadContainer}>
         <FormLabel className={classes.inputLabel}>{label}</FormLabel>
         <p>Drag and drop your files anywhere or</p>
         <Button type="button">
@@ -108,7 +108,7 @@ const FileUpload = ({
           value=""
           {...otherProps}
         />
-      </Container>
+      </section>
       <article>
         <span>To Upload</span>
         <section>

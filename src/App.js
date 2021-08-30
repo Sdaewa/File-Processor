@@ -64,7 +64,7 @@ const App = () => {
           <form onSubmit={handleSubmit}>
             <FileUpload
               accept=".jpg,.png,.jpeg, .pdf"
-              label="Drop area"
+              // label="Drop area"
               updateFilesCb={updateUploadedFiles}
               multiple
             />
