@@ -62,7 +62,12 @@ const App = () => {
       <main>
         <Container className={classes.dropZone}>
           <form onSubmit={handleSubmit}>
-            <FileUpload />
+            <FileUpload
+              accept=".jpg,.png,.jpeg, .pdf"
+              label="Drop area"
+              updateFilesCb={updateUploadedFiles}
+              multiple
+            />
             <Box className={classes.box}>
               <Button variant="contained" color="primary" type="submit">
                 Submit
