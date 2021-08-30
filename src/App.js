@@ -20,10 +20,10 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "auto",
   },
   dropZone: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    height: "50vh",
+    // justifyContent: "center",
+    // alignItems: "center",
+    // height: "50vh",
+    padding: "50px 25px 25px",
   },
   box: {
     textAlign: "center",
@@ -33,7 +33,6 @@ const useStyles = makeStyles((theme) => ({
 
 const App = () => {
   const classes = useStyles();
-
   const [newInfo, setNewInfo] = useState({
     files: [],
   });
@@ -63,12 +62,7 @@ const App = () => {
       <main>
         <Container className={classes.dropZone}>
           <form onSubmit={handleSubmit}>
-            <FileUpload
-              accept=".jpg,.png,.jpeg, .pdf"
-              label="Drop area"
-              updateFilesCb={updateUploadedFiles}
-              multiple
-            />
+            <FileUpload />
             <Box className={classes.box}>
               <Button variant="contained" color="primary" type="submit">
                 Submit
