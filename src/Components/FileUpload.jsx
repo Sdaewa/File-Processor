@@ -16,14 +16,16 @@ const FileUpload = () => {
   const classes = useStyles();
 
   return (
-    <DropzoneArea
-      showPreviews={true}
-      showPreviewsInDropzone={false}
-      useChipsForPreview
-      previewGridProps={{ container: { spacing: 1, direction: "row" } }}
-      previewChipProps={{ classes: { root: classes.previewChip } }}
-      previewText="Selected files"
-    />
+    <div>
+      <DropzoneArea
+        showPreviews={true}
+        showPreviewsInDropzone={false}
+        useChipsForPreview
+        previewGridProps={{ container: { spacing: 1, direction: "row" } }}
+        previewChipProps={{ classes: { root: classes.previewChip } }}
+        previewText="Selected files"
+      />
+    </div>
   );
 };
 

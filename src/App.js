@@ -6,6 +6,7 @@ import {
   Container,
   Grid,
   Toolbar,
+  Box,
   Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
@@ -17,6 +18,16 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.background.paper,
     padding: theme.spacing(6),
     marginTop: "auto",
+  },
+  dropZone: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    height: "50vh",
+  },
+  box: {
+    textAlign: "center",
+    padding: "25px 20px",
   },
 }));
 
@@ -50,7 +61,7 @@ const App = () => {
         </Toolbar>
       </AppBar>
       <main>
-        <Container maxWidth="lg">
+        <Container className={classes.dropZone}>
           <form onSubmit={handleSubmit}>
             <FileUpload
               accept=".jpg,.png,.jpeg, .pdf"
@@ -58,14 +69,16 @@ const App = () => {
               updateFilesCb={updateUploadedFiles}
               multiple
             />
-
-            <button type="submit">Submit</button>
+            <Box className={classes.box}>
+              <Button variant="contained" color="primary" type="submit">
+                Submit
+              </Button>
+            </Box>
           </form>
-
-          <Grid container>
-            <Grid item>Pack</Grid>
-          </Grid>
         </Container>
+        <Grid container>
+          <Grid item>Pack</Grid>
+        </Grid>
       </main>
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>
