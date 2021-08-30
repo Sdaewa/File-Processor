@@ -14,7 +14,10 @@ const useStyles = makeStyles((theme) =>
 
 const FileUpload = () => {
   const classes = useStyles();
-  const input = useRef();
+  const file = useRef();
+  const enteredfile = file;
+
+  console.log(enteredfile);
 
   return (
     <div>
@@ -22,8 +25,7 @@ const FileUpload = () => {
         showPreviews={true}
         dropzoneText="Drag and Drop and file or click here"
         showAlerts={true}
-        inputRef={input}
-        getFileAddedMessage
+        inputRef={file}
         maxFileSize={3000000}
         showPreviewsInDropzone={false}
         useChipsForPreview
