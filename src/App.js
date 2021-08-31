@@ -78,11 +78,7 @@ const App = () => {
       <main>
         <Container className={classes.dropZone}>
           <form>
-            <FileUpload
-              accept=".jpg,.png,.jpeg,.pdf"
-              updateFilesCb={updateUploadedFiles}
-              multiple
-            />
+            <FileUpload updateFilesCb={updateUploadedFiles} multiple />
             <Box className={classes.box}>
               <Button
                 variant="contained"

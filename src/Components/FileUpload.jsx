@@ -54,9 +54,9 @@ const FileUpload = ({
     let err = "";
     const types = ["image/png", "image/jpeg", "image/gif", "application/pdf"];
 
-    for (var x = 0; x < files.length; x++) {
-      if (types.every((type) => files[x].type !== type)) {
-        err += files[x].type + " is not a supported format\n";
+    for (let i = 0; i < files.length; i++) {
+      if (types.every((type) => files[i].type !== type)) {
+        err += files[i].type + " is not a supported format\n";
       }
     }
 
@@ -79,10 +79,28 @@ const FileUpload = ({
     return true;
   };
 
+  const checkFileSize = (e) => {
+    let files = e.target.files;
+    let size = 500000;
+    let err = "";
+    for (let i = 0; i < files.length; i++) {
+      if (files[i].size > size) {
+        err += files[i].type + "is too large, please pick a smaller file\n";
+      }
+    }
+    if (err !== "") {
+      e.target.value = null;
+      console.log(err);
+      return false;
+    }
+
+    return true;
+  };
+
   const handleNewFileUpload = (e) => {
     const { files: newFiles } = e.target;
     console.log(files);
-    if (maxSelectFile(e) && checkMimeType(e)) {
+    if (maxSelectFile(e) && checkMimeType(e) && checkFileSize(e)) {
       let updatedFiles = addNewFiles(newFiles);
       setFiles(updatedFiles);
       callUpdateFilesCb(updatedFiles);
