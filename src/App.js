@@ -64,7 +64,6 @@ const App = () => {
           <form onSubmit={handleSubmit}>
             <FileUpload
               accept=".jpg,.png,.jpeg, .pdf"
-              // label="Drop area"
               updateFilesCb={updateUploadedFiles}
               multiple
             />
@@ -75,9 +74,6 @@ const App = () => {
             </Box>
           </form>
         </Container>
-        <Grid container>
-          <Grid item>Pack</Grid>
-        </Grid>
       </main>
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>

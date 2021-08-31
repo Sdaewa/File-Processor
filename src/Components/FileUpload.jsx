@@ -25,7 +25,7 @@ const useStyles = makeStyles(() => ({
   input: {
     fontSize: "18px",
     display: "block",
-    width: "100",
+    width: "inherit",
     border: "none",
     textTransform: "none",
     position: "absolute",
@@ -43,6 +43,81 @@ const useStyles = makeStyles(() => ({
     left: "0",
     position: "absolute",
   },
+  filePreviewContainer: {
+    marginTop: "50px",
+    marginBottom: "50px",
+
+    span: {
+      fontSize: "14px",
+    },
+  },
+  previewList: {
+    display: "flex",
+    flexWrap: "wrap",
+    marginTop: "10px",
+
+    "@media only screen and (max-width: 400px)": {
+      flexDirection: "column",
+    },
+  },
+  previewContainer: {
+    padding: "0.25rem",
+    width: "20%",
+    height: "120px",
+    borderRadius: "6px",
+    boxSizing: " border-box",
+
+    "&:hover": {
+      opacity: " 0.55",
+
+      "${FileMetaData}": {
+        display: "flex",
+      },
+    },
+
+    "& > div:first-of-type": {
+      height: "100%",
+      position: "relative",
+    },
+
+    "@media only screen and (max-width: 750px)": {
+      width: "25%",
+    },
+
+    " @media only screen and (max-width: 500px)": {
+      width: "50%",
+    },
+
+    "@media only screen and (max-width: 400px)": {
+      width: "100%",
+      padding: "0 0 0.4em",
+    },
+  },
+  imgPreview: {
+    borderRadius: "6px",
+    width: "100%",
+    height: " 100%",
+  },
+  fileMetada: {
+    display: '${(props) => (props.isImageFile ? "none" : "flex")}',
+    flexDirection: "column",
+    position: "absolute",
+    top: "0",
+    left: "0",
+    right: "0",
+    bottom: "0",
+    padding: "10px",
+    borderRadius: "6px",
+    color: "white",
+    fontWeight: "bold",
+    backgroundColor: "rgba(5, 5, 5, 0.55)",
+
+    aside: {
+      marginTop: "auto",
+      display: "flex",
+      justifyContent: "space-between",
+    },
+  },
 }));
 
 const FileUpload = ({
@@ -56,8 +131,9 @@ const FileUpload = ({
   const [files, setFiles] = useState({});
 
   const handleUploadBtnClick = () => {
-    fileInputField.current.click();
+    console.log(fileInputField.current.click());
   };
+  console.log(fileInputField.current);
 
   const addNewFiles = (newFiles) => {
     for (let file of newFiles) {
@@ -93,10 +169,9 @@ const FileUpload = ({
 
   return (
     <>
-      <section className={classes.fileUploadContainer}>
-        <FormLabel className={classes.inputLabel}>{label}</FormLabel>
+      <Container className={classes.fileUploadContainer}>
         <p>Drag and drop your files anywhere or</p>
-        <Button type="button">
+        <Button variant="outlined" color="primary" type="submit">
           <i className="fas fa-file-upload" />
           <span> Upload {otherProps.multiple ? "files" : "a file"}</span>
         </Button>
@@ -105,26 +180,25 @@ const FileUpload = ({
           type="file"
           ref={fileInputField}
           title=""
-          value=""
+          ref={fileInputField}
           {...otherProps}
         />
-      </section>
-      <article>
+      </Container>
+      <article className={classes.filePreviewContainer}>
         <span>To Upload</span>
-        <section>
+        <section className={classes.previewList}>
           {Object.keys(files).map((fileName, index) => {
             let file = files[fileName];
             let isImageFile = file.type.split("/")[0] === "image";
             return (
-              <section key={fileName}>
+              <section key={fileName} className={classes.previewContainer}>
                 <div>
-                  {isImageFile && (
-                    <image
-                      src={URL.createObjectURL(file)}
-                      alt={`file preview ${index}`}
-                    />
-                  )}
-                  <div isImageFile={isImageFile}>
+                  <img
+                    className={classes.imgPreview}
+                    src={URL.createObjectURL(file)}
+                    alt={`file preview ${index}`}
+                  />
+                  <div className={classes.fileMetada} isImageFile={isImageFile}>
                     <span>{file.name}</span>
                     <aside>
                       <span>{convertBytesToKB(file.size)} kb</span>
