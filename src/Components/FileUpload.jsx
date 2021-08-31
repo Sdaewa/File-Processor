@@ -133,7 +133,7 @@ const FileUpload = ({
   const handleUploadBtnClick = () => {
     console.log(fileInputField.current.click());
   };
-  console.log(fileInputField.current);
+  console.log(fileInputField);
 
   const addNewFiles = (newFiles) => {
     for (let file of newFiles) {
@@ -171,7 +171,11 @@ const FileUpload = ({
     <>
       <Container className={classes.fileUploadContainer}>
         <p>Drag and drop your files anywhere or</p>
-        <Button variant="outlined" color="primary" type="submit">
+        <Button
+          variant="outlined"
+          color="primary"
+          type="button"
+          onClick={handleUploadBtnClick}>
           <i className="fas fa-file-upload" />
           <span> Upload {otherProps.multiple ? "files" : "a file"}</span>
         </Button>
@@ -180,7 +184,8 @@ const FileUpload = ({
           type="file"
           ref={fileInputField}
           title=""
-          ref={fileInputField}
+          value=""
+          onChange={handleNewFileUpload}
           {...otherProps}
         />
       </Container>
@@ -202,7 +207,10 @@ const FileUpload = ({
                     <span>{file.name}</span>
                     <aside>
                       <span>{convertBytesToKB(file.size)} kb</span>
-                      {/* <RemoveFileIcon className="fas fa-trash-alt" /> */}
+                      <i
+                        className="fas fa-trash-alt"
+                        onClick={() => removeFile(fileName)}
+                      />
                     </aside>
                   </div>
                 </div>

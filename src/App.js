@@ -63,7 +63,7 @@ const App = () => {
         <Container className={classes.dropZone}>
           <form onSubmit={handleSubmit}>
             <FileUpload
-              accept=".jpg,.png,.jpeg, .pdf"
+              accept=".jpg,.png,.jpeg,.pdf"
               updateFilesCb={updateUploadedFiles}
               multiple
             />
