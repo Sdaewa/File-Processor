@@ -43,20 +43,29 @@ const FileUpload = ({
     updateFilesCb(filesAsArray);
   };
 
-  const handleNewFileUpload = (e) => {
-    const { files: newFiles } = e.target;
-    console.log(files);
-    if (maxSelectFile(e)) {
-      let updatedFiles = addNewFiles(newFiles);
-      setFiles(updatedFiles);
-      callUpdateFilesCb(updatedFiles);
-    }
-  };
-
   const removeFile = (fileName) => {
     delete files[fileName];
     setFiles({ ...files });
     callUpdateFilesCb({ ...files });
+  };
+
+  const checkMimeType = (e) => {
+    let files = e.target.files;
+    let err = "";
+    const types = ["image/png", "image/jpeg", "image/gif", "application/pdf"];
+
+    for (var x = 0; x < files.length; x++) {
+      if (types.every((type) => files[x].type !== type)) {
+        err += files[x].type + " is not a supported format\n";
+      }
+    }
+
+    if (err !== "") {
+      e.target.value = null;
+      console.log(err);
+      return false;
+    }
+    return true;
   };
 
   const maxSelectFile = (e) => {
@@ -64,10 +73,20 @@ const FileUpload = ({
     if (files.length > 3) {
       const msg = "Only 3 images can be uploaded at a time";
       e.target.value = null;
-      console.log(msg);
+      console.log(msg); //<= to display in modal
       return false;
     }
     return true;
+  };
+
+  const handleNewFileUpload = (e) => {
+    const { files: newFiles } = e.target;
+    console.log(files);
+    if (maxSelectFile(e) && checkMimeType(e)) {
+      let updatedFiles = addNewFiles(newFiles);
+      setFiles(updatedFiles);
+      callUpdateFilesCb(updatedFiles);
+    }
   };
 
   return (
