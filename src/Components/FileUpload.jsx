@@ -203,7 +203,9 @@ const FileUpload = ({
                     src={URL.createObjectURL(file)}
                     alt={`file preview ${index}`}
                   />
-                  <div className={classes.fileMetada} isImageFile={isImageFile}>
+                  <div
+                    className={classes.fileMetada}
+                    isimagefile={isImageFile.toString()}>
                     <span>{file.name}</span>
                     <aside>
                       <span>{convertBytesToKB(file.size)} kb</span>
