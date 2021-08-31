@@ -131,9 +131,8 @@ const FileUpload = ({
   const [files, setFiles] = useState({});
 
   const handleUploadBtnClick = () => {
-    console.log(fileInputField.current.click());
+    fileInputField.current.click();
   };
-  console.log(fileInputField);
 
   const addNewFiles = (newFiles) => {
     for (let file of newFiles) {
@@ -201,7 +200,7 @@ const FileUpload = ({
                   <img
                     className={classes.imgPreview}
                     src={URL.createObjectURL(file)}
-                    alt={`file preview ${index}`}
+                    alt=""
                   />
                   <div
                     className={classes.fileMetada}
