@@ -36,22 +36,29 @@ const App = () => {
 
   const updateUploadedFiles = (files) =>
     setNewInfo({ ...newInfo, files: files });
-  console.log(newInfo.files[0]);
+  console.log(newInfo.file);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
     const data = new FormData();
 
-    data.append("file", newInfo.files[0]);
-    console.log("clicked", data);
+    for (let i = 0; i < newInfo.files.length; i++) {
+      data.append("file", newInfo.files[i]);
+    }
+
     axios({
       method: "post",
       url: "http://localhost:8000/upload",
       data: data,
-    }).then((res) => {
-      // then print response status
-      console.log(res.statusText);
-    });
+    })
+      .then((res) => {
+        // then print response status
+        console.log(res.statusText);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
   };
 
   return (
