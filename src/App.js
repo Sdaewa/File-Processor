@@ -8,31 +8,18 @@ import {
   Box,
   Typography,
 } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
 import axios from "axios";
 
-import FileUpload from "./Components/FileUpload";
-
-const useStyles = makeStyles((theme) => ({
-  footer: {
-    backgroundColor: theme.palette.background.paper,
-    padding: theme.spacing(6),
-    marginTop: "auto",
-  },
-  dropZone: {
-    padding: "50px 25px 25px",
-  },
-  box: {
-    textAlign: "center",
-    padding: "25px 20px",
-  },
-}));
+import ProgressBar from "./Components/UI/ProgressBar";
+import FileUpload from "./Components/Upload/FileUpload";
+import useStyles from "./Components/Upload/UploadStyles";
 
 const App = () => {
   const classes = useStyles();
   const [newInfo, setNewInfo] = useState({
     files: [],
   });
+  const [isLoaded, setIsLoaded] = useState(0);
 
   const updateUploadedFiles = (files) =>
     setNewInfo({ ...newInfo, files: files });
@@ -47,11 +34,12 @@ const App = () => {
       data.append("file", newInfo.files[i]);
     }
 
-    axios({
-      method: "post",
-      url: "http://localhost:8000/upload",
-      data: data,
-    })
+    axios
+      .post("http://localhost:8000/upload", data, {
+        onUploadProgress: (ProgressEvent) => {
+          setIsLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
+        },
+      })
       .then((res) => {
         // then print response status
         console.log(res.statusText);
@@ -79,6 +67,7 @@ const App = () => {
         <Container className={classes.dropZone}>
           <form>
             <FileUpload updateFilesCb={updateUploadedFiles} multiple />
+            <ProgressBar value={isLoaded} />
             <Box className={classes.box}>
               <Button
                 variant="contained"
