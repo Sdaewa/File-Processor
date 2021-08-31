@@ -1,6 +1,7 @@
 import React, { useRef, useState } from "react";
-import { Container, Box, Grid, Button, FormLabel } from "@material-ui/core";
-import { makeStyles } from "@material-ui/core/styles";
+import { Container, Button } from "@material-ui/core";
+
+import useStyles from "./UploadStyles";
 
 const KILO_BYTES_PER_BYTE = 1000;
 const DEFAULT_MAX_FILE_SIZE_IN_BYTES = 500000;
@@ -10,119 +11,10 @@ const convertNestedObjectToArray = (nestedObj) =>
 
 const convertBytesToKB = (bytes) => Math.round(bytes / KILO_BYTES_PER_BYTE);
 
-const useStyles = makeStyles(() => ({
-  fileUploadContainer: {
-    position: "relative",
-    margin: "25px 0 15px",
-    border: " 2px dotted lightgray",
-    padding: "35px 20px",
-    borderRadius: "6px",
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center",
-    backgroundColor: "white",
-  },
-  input: {
-    fontSize: "18px",
-    display: "block",
-    width: "inherit",
-    border: "none",
-    textTransform: "none",
-    position: "absolute",
-    top: "0",
-    left: "0",
-    right: "0",
-    bottom: "0",
-    opacity: "0",
-  },
-
-  inputLabel: {
-    top: -"21px",
-    fontSize: "13px",
-    color: "black",
-    left: "0",
-    position: "absolute",
-  },
-  filePreviewContainer: {
-    marginTop: "50px",
-    marginBottom: "50px",
-
-    span: {
-      fontSize: "14px",
-    },
-  },
-  previewList: {
-    display: "flex",
-    flexWrap: "wrap",
-    marginTop: "10px",
-
-    "@media only screen and (max-width: 400px)": {
-      flexDirection: "column",
-    },
-  },
-  previewContainer: {
-    padding: "0.25rem",
-    width: "20%",
-    height: "120px",
-    borderRadius: "6px",
-    boxSizing: " border-box",
-
-    "&:hover": {
-      opacity: " 0.55",
-
-      "${FileMetaData}": {
-        display: "flex",
-      },
-    },
-
-    "& > div:first-of-type": {
-      height: "100%",
-      position: "relative",
-    },
-
-    "@media only screen and (max-width: 750px)": {
-      width: "25%",
-    },
-
-    " @media only screen and (max-width: 500px)": {
-      width: "50%",
-    },
-
-    "@media only screen and (max-width: 400px)": {
-      width: "100%",
-      padding: "0 0 0.4em",
-    },
-  },
-  imgPreview: {
-    borderRadius: "6px",
-    width: "100%",
-    height: " 100%",
-  },
-  fileMetada: {
-    display: '${(props) => (props.isImageFile ? "none" : "flex")}',
-    flexDirection: "column",
-    position: "absolute",
-    top: "0",
-    left: "0",
-    right: "0",
-    bottom: "0",
-    padding: "10px",
-    borderRadius: "6px",
-    color: "white",
-    fontWeight: "bold",
-    backgroundColor: "rgba(5, 5, 5, 0.55)",
-
-    aside: {
-      marginTop: "auto",
-      display: "flex",
-      justifyContent: "space-between",
-    },
-  },
-}));
-
 const FileUpload = ({
   label,
   updateFilesCb,
+  handlerSubmit,
   maxFileSizeInBytes = DEFAULT_MAX_FILE_SIZE_IN_BYTES,
   ...otherProps
 }) => {
@@ -130,9 +22,9 @@ const FileUpload = ({
   const fileInputField = useRef();
   const [files, setFiles] = useState({});
 
-  const handleUploadBtnClick = () => {
-    fileInputField.current.click();
-  };
+  // const handleUploadBtnClick = () => {
+  //   fileInputField.current.click();
+  // };
 
   const addNewFiles = (newFiles) => {
     for (let file of newFiles) {
@@ -153,6 +45,7 @@ const FileUpload = ({
 
   const handleNewFileUpload = (e) => {
     const { files: newFiles } = e.target;
+    console.log(files);
     if (newFiles.length) {
       let updatedFiles = addNewFiles(newFiles);
       setFiles(updatedFiles);
@@ -169,12 +62,13 @@ const FileUpload = ({
   return (
     <>
       <Container className={classes.fileUploadContainer}>
-        <p>Drag and drop your files anywhere or</p>
+        <p>Drag and drop your files anywhere</p>
         <Button
           variant="outlined"
           color="primary"
           type="button"
-          onClick={handleUploadBtnClick}>
+          // onClick={handleUploadBtnClick}
+        >
           <i className="fas fa-file-upload" />
           <span> Upload {otherProps.multiple ? "files" : "a file"}</span>
         </Button>
@@ -207,7 +101,7 @@ const FileUpload = ({
                     isimagefile={isImageFile.toString()}>
                     <span>{file.name}</span>
                     <aside>
-                      <span>{convertBytesToKB(file.size)} kb</span>
+                      <span>{convertBytesToKB(file.size)} kb </span>
                       <i
                         className="fas fa-trash-alt"
                         onClick={() => removeFile(fileName)}

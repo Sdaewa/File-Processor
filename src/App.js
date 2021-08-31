@@ -4,7 +4,6 @@ import {
   Button,
   CssBaseline,
   Container,
-  Grid,
   Toolbar,
   Box,
   Typography,
@@ -20,9 +19,6 @@ const useStyles = makeStyles((theme) => ({
     marginTop: "auto",
   },
   dropZone: {
-    // justifyContent: "center",
-    // alignItems: "center",
-    // height: "50vh",
     padding: "50px 25px 25px",
   },
   box: {
@@ -39,10 +35,13 @@ const App = () => {
 
   const updateUploadedFiles = (files) =>
     setNewInfo({ ...newInfo, files: files });
+  console.log(newInfo.files);
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    //logic to create new user...
+    const data = new FormData();
+    data.append("file", newInfo.files);
+    console.log("clicked");
   };
 
   return (
@@ -61,14 +60,18 @@ const App = () => {
       </AppBar>
       <main>
         <Container className={classes.dropZone}>
-          <form onSubmit={handleSubmit}>
+          <form>
             <FileUpload
               accept=".jpg,.png,.jpeg,.pdf"
               updateFilesCb={updateUploadedFiles}
               multiple
             />
             <Box className={classes.box}>
-              <Button variant="contained" color="primary" type="submit">
+              <Button
+                variant="contained"
+                color="primary"
+                type="submit"
+                onClick={handleSubmit}>
                 Submit
               </Button>
             </Box>
