@@ -9,6 +9,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
+import axios from "axios";
 
 import FileUpload from "./Components/FileUpload";
 
@@ -42,6 +43,14 @@ const App = () => {
     const data = new FormData();
     data.append("file", newInfo.files);
     console.log("clicked");
+    axios
+      .post("http://localhost:3000/upload", data, {
+        // receive two parameter endpoint url ,form data
+      })
+      .then((res) => {
+        // then print response status
+        console.log(res.statusText);
+      });
   };
 
   return (
