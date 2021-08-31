@@ -46,7 +46,7 @@ const FileUpload = ({
   const handleNewFileUpload = (e) => {
     const { files: newFiles } = e.target;
     console.log(files);
-    if (newFiles.length) {
+    if (maxSelectFile(e)) {
       let updatedFiles = addNewFiles(newFiles);
       setFiles(updatedFiles);
       callUpdateFilesCb(updatedFiles);
@@ -57,6 +57,17 @@ const FileUpload = ({
     delete files[fileName];
     setFiles({ ...files });
     callUpdateFilesCb({ ...files });
+  };
+
+  const maxSelectFile = (e) => {
+    let files = e.target.files;
+    if (files.length > 3) {
+      const msg = "Only 3 images can be uploaded at a time";
+      e.target.value = null;
+      console.log(msg);
+      return false;
+    }
+    return true;
   };
 
   return (
