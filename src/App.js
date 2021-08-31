@@ -9,6 +9,8 @@ import {
   Typography,
 } from "@material-ui/core";
 import axios from "axios";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import ProgressBar from "./Components/UI/ProgressBar";
 import FileUpload from "./Components/Upload/FileUpload";
@@ -41,11 +43,10 @@ const App = () => {
         },
       })
       .then((res) => {
-        // then print response status
-        console.log(res.statusText);
+        toast.success("upload success");
       })
       .catch((e) => {
-        console.log(e);
+        toast.error("upload fail");
       });
   };
 
@@ -64,6 +65,13 @@ const App = () => {
         </Toolbar>
       </AppBar>
       <main>
+        <div className="form-group">
+          <ToastContainer
+            position={"top-center"}
+            autoClose={3000}
+            hideProgressBar
+          />
+        </div>
         <Container className={classes.dropZone}>
           <form>
             <FileUpload updateFilesCb={updateUploadedFiles} multiple />

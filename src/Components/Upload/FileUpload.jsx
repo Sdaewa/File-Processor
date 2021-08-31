@@ -1,5 +1,7 @@
 import React, { useRef, useState } from "react";
 import { Container, Button } from "@material-ui/core";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 import useStyles from "./UploadStyles";
 
@@ -51,19 +53,18 @@ const FileUpload = ({
 
   const checkMimeType = (e) => {
     let files = e.target.files;
-    let err = "";
+    let err = []; // create empty array
     const types = ["image/png", "image/jpeg", "image/gif", "application/pdf"];
-
     for (let i = 0; i < files.length; i++) {
       if (types.every((type) => files[i].type !== type)) {
-        err += files[i].type + " is not a supported format\n";
+        err[i] = files[i].type + " is not a supported format\n";
+        // assign message to array
       }
     }
-
-    if (err !== "") {
+    for (let x = 0; x < err.length; x++) {
+      // loop create toast massage
       e.target.value = null;
-      console.log(err);
-      return false;
+      toast.error(err[x]);
     }
     return true;
   };
