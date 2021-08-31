@@ -74,7 +74,7 @@ const FileUpload = ({
     if (files.length > 3) {
       const msg = "Only 3 images can be uploaded at a time";
       e.target.value = null;
-      console.log(msg); //<= to display in modal
+      toast.warn(msg);
       return false;
     }
     return true;
@@ -82,19 +82,17 @@ const FileUpload = ({
 
   const checkFileSize = (e) => {
     let files = e.target.files;
-    let size = 500000;
-    let err = "";
-    for (let i = 0; i < files.length; i++) {
+    let size = 2000000;
+    let err = [];
+    for (var i = 0; i < files.length; i++) {
       if (files[i].size > size) {
-        err += files[i].type + "is too large, please pick a smaller file\n";
+        err[i] = files[i].type + "is too large, please pick a smaller file\n";
       }
     }
-    if (err !== "") {
+    for (var x = 0; x < err.length; x++) {
+      toast.error(err[x]);
       e.target.value = null;
-      console.log(err);
-      return false;
     }
-
     return true;
   };
 
