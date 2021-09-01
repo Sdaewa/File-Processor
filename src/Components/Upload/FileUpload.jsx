@@ -54,7 +54,7 @@ const FileUpload = ({
   const checkMimeType = (e) => {
     let files = e.target.files;
     let err = []; // create empty array
-    const types = ["image/png", "image/jpeg", "image/gif", "application/pdf"];
+    const types = ["image/png", "image/jpeg", "image/jpg", "application/pdf"];
     for (let i = 0; i < files.length; i++) {
       if (types.every((type) => files[i].type !== type)) {
         err[i] = files[i].type + " is not a supported format\n";
@@ -71,8 +71,8 @@ const FileUpload = ({
 
   const maxSelectFile = (e) => {
     let files = e.target.files;
-    if (files.length > 3) {
-      const msg = "Only 3 images can be uploaded at a time";
+    if (files.length > 1) {
+      const msg = "Only 1 file can be uploaded at a time";
       e.target.value = null;
       toast.warn(msg);
       return false;
