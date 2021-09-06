@@ -25,7 +25,6 @@ const App = () => {
 
   const updateUploadedFiles = (files) =>
     setNewInfo({ ...newInfo, files: files });
-  console.log(newInfo.file);
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -37,7 +36,7 @@ const App = () => {
     }
 
     axios
-      .post("http://localhost:8000/upload", data, {
+      .post("http://localhost:8000/", data, {
         onUploadProgress: (ProgressEvent) => {
           setIsLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
         },

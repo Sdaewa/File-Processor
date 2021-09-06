@@ -54,7 +54,12 @@ const FileUpload = ({
   const checkMimeType = (e) => {
     let files = e.target.files;
     let err = []; // create empty array
-    const types = ["image/png", "image/jpeg", "image/jpg", "application/pdf"];
+    const types = [
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.template",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+      "application/pdf",
+    ];
     for (let i = 0; i < files.length; i++) {
       if (types.every((type) => files[i].type !== type)) {
         err[i] = files[i].type + " is not a supported format\n";
@@ -72,7 +77,7 @@ const FileUpload = ({
   const maxSelectFile = (e) => {
     let files = e.target.files;
     if (files.length > 1) {
-      const msg = "Only 1 file can be uploaded at a time";
+      const msg = "Only 1 image can be uploaded at a time";
       e.target.value = null;
       toast.warn(msg);
       return false;
