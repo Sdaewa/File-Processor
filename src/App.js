@@ -11,6 +11,8 @@ import {
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+// import { Document } from "react-pdf";
+import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
 
 import ProgressBar from "./Components/UI/ProgressBar";
 import FileUpload from "./Components/Upload/FileUpload";
@@ -18,6 +20,7 @@ import useStyles from "./Components/Upload/UploadStyles";
 
 const App = () => {
   const classes = useStyles();
+  const [pdf, setPdf] = useState("");
   const [newInfo, setNewInfo] = useState({
     files: [],
   });
@@ -60,6 +63,7 @@ const App = () => {
       .get("http://localhost:8000/convert")
       .then((res) => {
         const data = new Buffer.from(res.data).toString("base64");
+        setPdf(data);
         const blob = new Blob([data], { type: "application/pdf" });
         console.log(blob);
         toast.success("upload success");
@@ -68,6 +72,7 @@ const App = () => {
         toast.error("upload fail");
       });
   };
+  console.log(pdf);
 
   return (
     <>
@@ -113,6 +118,9 @@ const App = () => {
           onClick={handleGet}>
           GET
         </Button>
+        <Container>
+          <Document file={`data:application/pdf;base64,${pdf}`}></Document>
+        </Container>
       </main>
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>
