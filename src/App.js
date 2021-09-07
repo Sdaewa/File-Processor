@@ -59,6 +59,9 @@ const App = () => {
     axios
       .get("http://localhost:8000/convert")
       .then((res) => {
+        const data = new Buffer.from(res.data).toString("base64");
+        const blob = new Blob([data], { type: "application/pdf" });
+        console.log(blob);
         toast.success("upload success");
       })
       .catch((e) => {
