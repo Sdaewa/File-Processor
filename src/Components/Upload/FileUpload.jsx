@@ -59,6 +59,7 @@ const FileUpload = ({
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
       "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
       "application/pdf",
+      "application/msword",
     ];
     for (let i = 0; i < files.length; i++) {
       if (types.every((type) => files[i].type !== type)) {
