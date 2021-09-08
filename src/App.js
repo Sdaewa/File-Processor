@@ -56,6 +56,8 @@ const App = () => {
       .catch((e) => {
         toast.error("upload fail");
       });
+
+    console.log(pdf);
   };
 
   const handleGet = (event) => {
@@ -75,8 +77,8 @@ const App = () => {
       .catch((e) => {
         toast.error("upload fail");
       });
+    console.log(pdf);
   };
-  console.log(pdf);
 
   return (
     <>
