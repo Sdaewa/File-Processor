@@ -11,12 +11,14 @@ import {
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import { Document } from "react-pdf";
-import { Document, Page } from "react-pdf/dist/esm/entry.webpack";
 
+// Import styles
+import "@react-pdf-viewer/core/lib/styles/index.css";
+import FilePreview from "./Components/Files/FilePreview";
 import ProgressBar from "./Components/UI/ProgressBar";
-import FileUpload from "./Components/Upload/FileUpload";
-import useStyles from "./Components/Upload/UploadStyles";
+import FileUpload from "./Components/Files/FileUpload";
+import useStyles from "./Components/Files/UploadStyles";
+import FileDownload from "./Components/Files/FileDownload";
 
 const App = () => {
   const classes = useStyles();
@@ -61,11 +63,13 @@ const App = () => {
 
     axios
       .get("http://localhost:8000/convert")
+
       .then((res) => {
         const data = new Buffer.from(res.data).toString("base64");
-        setPdf(data);
         const blob = new Blob([data], { type: "application/pdf" });
-        console.log(blob);
+        const url = URL.createObjectURL(blob);
+        console.log(url);
+        setPdf(url);
         toast.success("upload success");
       })
       .catch((e) => {
@@ -118,10 +122,15 @@ const App = () => {
           onClick={handleGet}>
           GET
         </Button>
-        <Container>
-          <Document file={`data:application/pdf;base64,${pdf}`}></Document>
-        </Container>
+        <FileDownload onClick={handleGet} pdf={pdf} />
+        <Container
+          style={{
+            border: "1px solid rgba(0, 0, 0, 0.3)",
+            height: "750px",
+          }}></Container>
+        <FilePreview onGet={pdf} />
       </main>
+
       <footer className={classes.footer}>
         <Typography variant="h6" align="center" gutterBottom>
           Footer

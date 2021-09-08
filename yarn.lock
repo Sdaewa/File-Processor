@@ -1571,6 +1571,11 @@
     "schema-utils" "^2.6.5"
     "source-map" "^0.7.3"
 
+"@react-pdf-viewer/core@^2.8.0":
+  "integrity" "sha512-HFQqOn65oyg3QmKu9H/KY6hNrV7QfZK48K0jbAJR5S8d2rkapd7G368SWMop5dyQ6XEbNjO3eRXzzJWnm387iw=="
+  "resolved" "https://registry.npmjs.org/@react-pdf-viewer/core/-/core-2.8.0.tgz"
+  "version" "2.8.0"
+
 "@react-pdf/font@^2.0.12":
   "integrity" "sha512-Bxm8kZEpvfdV24fWgHKPi/Or1rkcEKlbLTzzEMvHxWQI37AGgLqx18SxvjxN8Uf0RH84vkZs/KlAeDQkhfPSqA=="
   "resolved" "https://registry.npmjs.org/@react-pdf/font/-/font-2.0.12.tgz"
@@ -5635,6 +5640,11 @@
     "loader-utils" "^2.0.0"
     "schema-utils" "^3.0.0"
 
+"file-saver@^2.0.5":
+  "integrity" "sha512-P9bmyZ3h/PRG+Nzga+rbdI4OEpNDzAVyy74uVO9ATgzLK6VtAsYybF/+TOCvrc0MO793d6+42lLyZTw7/ArVzA=="
+  "resolved" "https://registry.npmjs.org/file-saver/-/file-saver-2.0.5.tgz"
+  "version" "2.0.5"
+
 "file-selector@^0.1.12":
   "integrity" "sha512-kCWw3+Aai8Uox+5tHCNgMFaUdgidxvMnLWO6fM5sZ0hA2wlHP5/DHGF0ECe84BiB95qdJbKNEJhWKVDvMN+JDQ=="
   "resolved" "https://registry.npmjs.org/file-selector/-/file-selector-0.1.19.tgz"
@@ -9073,7 +9083,7 @@
     "safe-buffer" "^5.0.1"
     "sha.js" "^2.4.8"
 
-"pdfjs-dist@2.6.347":
+"pdfjs-dist@^2.6.347", "pdfjs-dist@2.6.347":
   "integrity" "sha512-QC+h7hG2su9v/nU1wEI3SnpPIrqJODL7GTDFvR74ANKGq1AFJW16PH8VWnhpiTi9YcLSFV9xLeWSgq+ckHLdVQ=="
   "resolved" "https://registry.npmjs.org/pdfjs-dist/-/pdfjs-dist-2.6.347.tgz"
   "version" "2.6.347"
