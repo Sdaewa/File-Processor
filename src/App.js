@@ -12,9 +12,6 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-// Import styles
-import "@react-pdf-viewer/core/lib/styles/index.css";
-import FilePreview from "./Components/Files/FilePreview";
 import ProgressBar from "./Components/UI/ProgressBar";
 import FileUpload from "./Components/Files/FileUpload";
 import useStyles from "./Components/Files/UploadStyles";
@@ -130,7 +127,6 @@ const App = () => {
             border: "1px solid rgba(0, 0, 0, 0.3)",
             height: "750px",
           }}></Container>
-        <FilePreview onGet={pdf} />
       </main>
 
       <footer className={classes.footer}>
