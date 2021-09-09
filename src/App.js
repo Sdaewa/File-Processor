@@ -53,8 +53,6 @@ const App = () => {
       .catch((e) => {
         toast.error("upload fail");
       });
-
-    console.log(pdf);
   };
 
   const handleGet = (event) => {
@@ -67,14 +65,12 @@ const App = () => {
         const data = new Buffer.from(res.data).toString("base64");
         const blob = new Blob([data], { type: "application/pdf" });
         const url = URL.createObjectURL(blob);
-        console.log(url);
         setPdf(url);
         toast.success("upload success");
       })
       .catch((e) => {
         toast.error("upload fail");
       });
-    console.log(pdf);
   };
 
   return (
@@ -121,12 +117,7 @@ const App = () => {
           onClick={handleGet}>
           GET
         </Button>
-        <FileDownload onClick={handleGet} pdf={pdf} />
-        <Container
-          style={{
-            border: "1px solid rgba(0, 0, 0, 0.3)",
-            height: "750px",
-          }}></Container>
+        <FileDownload />
       </main>
 
       <footer className={classes.footer}>

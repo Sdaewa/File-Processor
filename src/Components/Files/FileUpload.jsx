@@ -6,7 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import useStyles from "./UploadStyles";
 
 const KILO_BYTES_PER_BYTE = 1000;
-const DEFAULT_MAX_FILE_SIZE_IN_BYTES = 500000;
+const DEFAULT_MAX_FILE_SIZE_IN_BYTES = 50000000;
 
 const convertNestedObjectToArray = (nestedObj) =>
   Object.keys(nestedObj).map((key) => nestedObj[key]);
@@ -77,8 +77,8 @@ const FileUpload = ({
 
   const maxSelectFile = (e) => {
     let files = e.target.files;
-    if (files.length > 1) {
-      const msg = "Only 1 image can be uploaded at a time";
+    if (files.length > 3) {
+      const msg = "Only 3 image can be uploaded at a time";
       e.target.value = null;
       toast.warn(msg);
       return false;

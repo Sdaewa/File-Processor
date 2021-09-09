@@ -1,10 +1,10 @@
 import React from "react";
 
 const FileDownload = (props) => {
-  console.log(props);
-  const downloadEmployeeData = () => {
+  const download = () => {
     fetch("http://localhost:8000/convert").then((response) => {
       response.blob().then((blob) => {
+        console.log(blob);
         let url = window.URL.createObjectURL(blob);
         let a = document.createElement("a");
         a.href = url;
@@ -19,7 +19,7 @@ const FileDownload = (props) => {
     <div id="container">
       <h1>Download File</h1>
 
-      <button onClick={downloadEmployeeData}>Download</button>
+      <button onClick={download}>Download</button>
     </div>
   );
 };
