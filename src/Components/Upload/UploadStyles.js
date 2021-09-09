@@ -60,9 +60,9 @@ const useStyles = makeStyles(() => ({
     "&:hover": {
       opacity: " 0.55",
 
-      "${FileMetaData}": {
-        display: "flex",
-      },
+      // "${FileMetaData}": {
+      //   display: "flex",
+      // },
     },
 
     "& > div:first-of-type": {

@@ -4,8 +4,8 @@ import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProgressBar from "../UI/ProgressBar";
-import FileUpload from "./FileUpload";
-import useStyles from "./UploadStyles";
+import FileUpload from "../Upload/FileUpload";
+import useStyles from "../Upload/UploadStyles";
 
 const Files = () => {
   const classes = useStyles();

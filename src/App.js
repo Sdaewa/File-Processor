@@ -2,31 +2,12 @@ import React from "react";
 import { AppBar, CssBaseline, Toolbar, Typography } from "@material-ui/core";
 import "react-toastify/dist/ReactToastify.css";
 
-import FilesZone from "./Components/Files/FilesZone";
-import useStyles from "./Components/Files/UploadStyles";
-import FileDownload from "./Components/Files/FileDownload";
+import FilesZone from "./Components/FilesZone/FilesZone";
+import useStyles from "./Components/Upload/UploadStyles";
+import FileDownload from "./Components/Download/FileDownload";
 
 const App = () => {
   const classes = useStyles();
-  // const [pdf, setPdf] = useState("");
-
-  // const handleGet = (event) => {
-  //   event.preventDefault();
-
-  //   axios
-  //     .get("http://localhost:8000/convert")
-
-  //     .then((res) => {
-  //       const data = new Buffer.from(res.data).toString("base64");
-  //       const blob = new Blob([data], { type: "application/pdf" });
-  //       const url = URL.createObjectURL(blob);
-  //       setPdf(url);
-  //       toast.success("upload success");
-  //     })
-  //     .catch((e) => {
-  //       toast.error("upload fail");
-  //     });
-  // };
 
   return (
     <>

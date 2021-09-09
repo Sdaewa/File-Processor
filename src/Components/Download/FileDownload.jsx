@@ -1,10 +1,12 @@
 import React, { useState } from "react";
 
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import ProgressBar from "../UI/ProgressBar";
 import { Button } from "@material-ui/core";
 import axios from "axios";
 
-const FileDownload = (props) => {
+const FileDownload = () => {
   const [isLoaded, setIsLoaded] = useState(0);
 
   const download = () => {
@@ -22,6 +24,10 @@ const FileDownload = (props) => {
         a.href = url;
         a.download = "newDocument.pdf";
         a.click();
+        toast.success("Download Successful");
+      })
+      .catch((e) => {
+        toast.error("Download Failed");
       });
   };
 
