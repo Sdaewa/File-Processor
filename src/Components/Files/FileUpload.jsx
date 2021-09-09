@@ -114,59 +114,66 @@ const FileUpload = ({
 
   return (
     <>
-      <Container className={classes.fileUploadContainer}>
-        <p>Drag and drop your files anywhere</p>
-        <Button
-          variant="outlined"
-          color="primary"
-          type="button"
-          // onClick={handleUploadBtnClick}
-        >
-          <i className="fas fa-file-upload" />
-          <span> Upload {otherProps.multiple ? "files" : "a file"}</span>
-        </Button>
-        <input
-          className={classes.input}
-          type="file"
-          ref={fileInputField}
-          title=""
-          value=""
-          onChange={handleNewFileUpload}
-          {...otherProps}
+      <div className="form-group">
+        <ToastContainer
+          position={"top-center"}
+          autoClose={3000}
+          hideProgressBar
         />
-      </Container>
-      <article className={classes.filePreviewContainer}>
-        <span>To Upload</span>
-        <section className={classes.previewList}>
-          {Object.keys(files).map((fileName, index) => {
-            let file = files[fileName];
-            let isImageFile = file.type.split("/")[0] === "image";
-            return (
-              <section key={fileName} className={classes.previewContainer}>
-                <div>
-                  <img
-                    className={classes.imgPreview}
-                    src={URL.createObjectURL(file)}
-                    alt=""
-                  />
-                  <div
-                    className={classes.fileMetada}
-                    isimagefile={isImageFile.toString()}>
-                    <span>{file.name}</span>
-                    <aside>
-                      <span>{convertBytesToKB(file.size)} kb </span>
-                      <i
-                        className="fas fa-trash-alt"
-                        onClick={() => removeFile(fileName)}
-                      />
-                    </aside>
+        <Container className={classes.fileUploadContainer}>
+          <p>Drag and drop your files anywhere</p>
+          <Button
+            variant="outlined"
+            color="primary"
+            type="button"
+            // onClick={handleUploadBtnClick}
+          >
+            <i className="fas fa-file-upload" />
+            <span> Upload {otherProps.multiple ? "files" : "a file"}</span>
+          </Button>
+          <input
+            className={classes.input}
+            type="file"
+            ref={fileInputField}
+            title=""
+            value=""
+            onChange={handleNewFileUpload}
+            {...otherProps}
+          />
+        </Container>
+        <article className={classes.filePreviewContainer}>
+          <span>To Upload</span>
+          <section className={classes.previewList}>
+            {Object.keys(files).map((fileName, index) => {
+              let file = files[fileName];
+              let isImageFile = file.type.split("/")[0] === "image";
+              return (
+                <section key={fileName} className={classes.previewContainer}>
+                  <div>
+                    <img
+                      className={classes.imgPreview}
+                      src={URL.createObjectURL(file)}
+                      alt=""
+                    />
+                    <div
+                      className={classes.fileMetada}
+                      isimagefile={isImageFile.toString()}>
+                      <span>{file.name}</span>
+                      <aside>
+                        <span>{convertBytesToKB(file.size)} kb </span>
+                        <i
+                          className="fas fa-trash-alt"
+                          onClick={() => removeFile(fileName)}
+                        />
+                      </aside>
+                    </div>
                   </div>
-                </div>
-              </section>
-            );
-          })}
-        </section>
-      </article>
+                </section>
+              );
+            })}
+          </section>
+        </article>
+      </div>
     </>
   );
 };
