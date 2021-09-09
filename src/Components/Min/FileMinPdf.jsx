@@ -11,7 +11,7 @@ const FileDownload = () => {
 
   const download = () => {
     axios
-      .get("http://localhost:8000/convertToPdf", {
+      .get("http://localhost:8000/convertToMin", {
         onDownloadProgress: (ProgressEvent) => {
           setIsLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
         },
@@ -22,7 +22,7 @@ const FileDownload = () => {
         let url = window.URL.createObjectURL(blob);
         let a = document.createElement("a");
         a.href = url;
-        a.download = "newDocument.pdf";
+        // a.download = "newDocument.pdf";
         a.click();
         toast.success("Download Successful");
       })
@@ -33,7 +33,7 @@ const FileDownload = () => {
 
   return (
     <div id="container">
-      <h1>Download File</h1>
+      <h1>Minimize File</h1>
       <ProgressBar value={isLoaded} />
       <Button
         variant="contained"

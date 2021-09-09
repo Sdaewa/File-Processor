@@ -5,6 +5,7 @@ import "react-toastify/dist/ReactToastify.css";
 import FilesZone from "./Components/FilesZone/FilesZone";
 import useStyles from "./Components/Upload/UploadStyles";
 import FileDownload from "./Components/Download/FileDownload";
+import FileMinPdf from "./Components/Min/FileMinPdf";
 
 const App = () => {
   const classes = useStyles();
@@ -26,6 +27,7 @@ const App = () => {
       <main>
         <FilesZone />
         <FileDownload />
+        <FileMinPdf />
       </main>
 
       <footer className={classes.footer}>
