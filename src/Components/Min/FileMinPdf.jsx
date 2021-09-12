@@ -33,7 +33,7 @@ const FileDownload = () => {
 
   return (
     <div id="container">
-      <h1>Minimize File</h1>
+      <h1>Minimize PDF</h1>
       <ProgressBar value={isLoaded} />
       <Button
         variant="contained"

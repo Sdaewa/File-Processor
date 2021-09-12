@@ -20,7 +20,7 @@ const App = () => {
         }}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
-            File compressor
+            PDF Processor
           </Typography>
         </Toolbar>
       </AppBar>
