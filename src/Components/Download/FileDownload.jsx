@@ -1,10 +1,10 @@
 import React, { useState } from "react";
+import axios from "axios";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProgressBar from "../UI/ProgressBar";
 import { Button } from "@material-ui/core";
-import axios from "axios";
 
 const FileDownload = () => {
   const [isLoaded, setIsLoaded] = useState(0);

@@ -1,12 +1,12 @@
 import React from "react";
+
 import { AppBar, CssBaseline, Toolbar, Typography } from "@material-ui/core";
 import "react-toastify/dist/ReactToastify.css";
-
 import FilesZone from "./Components/FilesZone/FilesZone";
 import useStyles from "./Components/Upload/UploadStyles";
 import FileDownload from "./Components/Download/FileDownload";
 import FileMinPdf from "./Components/Min/FileMinPdf";
-import Modal from "./Components/Modal/Modal";
+import ModalEmail from "./Components/Modal/ModalEmail";
 
 const App = () => {
   const classes = useStyles();
@@ -29,7 +29,7 @@ const App = () => {
         <FilesZone />
         <FileDownload />
         <FileMinPdf />
-        <Modal />
+        <ModalEmail />
       </main>
 
       <footer className={classes.footer}>
