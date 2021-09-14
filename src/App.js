@@ -6,6 +6,7 @@ import FilesZone from "./Components/FilesZone/FilesZone";
 import useStyles from "./Components/Upload/UploadStyles";
 import FileDownload from "./Components/Download/FileDownload";
 import FileMinPdf from "./Components/Min/FileMinPdf";
+import Modal from "./Components/Modal/Modal";
 
 const App = () => {
   const classes = useStyles();
@@ -28,6 +29,7 @@ const App = () => {
         <FilesZone />
         <FileDownload />
         <FileMinPdf />
+        <Modal />
       </main>
 
       <footer className={classes.footer}>
