@@ -1,20 +1,47 @@
-import React from "react";
-import Button from "@material-ui/core/Button";
-import TextField from "@material-ui/core/TextField";
-import Dialog from "@material-ui/core/Dialog";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContent from "@material-ui/core/DialogContent";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
+import React, { useState, useRef } from "react";
+import axios from "axios";
+
+import {
+  Button,
+  TextField,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+} from "@material-ui/core";
 
 const ModalEmail = () => {
-  const [open, setOpen] = React.useState(false);
+  const [open, setOpen] = useState(false);
+  const [email, setEmail] = useState("");
+  const emailRef = useRef();
+
+  const emailInput = emailRef.current;
+  console.log(emailInput);
+  // setEmail(emailInput);
+  const postEmail = () => {
+    axios
+      .get("/sendByEmail", {
+        method: "POST",
+      })
+      .then((res) => {
+        res.json();
+        console.log(res);
+      })
+      .then((data) => {
+        alert(data.message);
+        setEmail("");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
 
   const handleClickOpen = () => {
     setOpen(true);
   };
 
   const handleClose = () => {
+    postEmail();
     setOpen(false);
   };
 
@@ -34,6 +61,7 @@ const ModalEmail = () => {
           </DialogContentText>
           <TextField
             autoFocus
+            inputRef={emailRef}
             margin="dense"
             id="name"
             label="Email Address"
@@ -45,7 +73,7 @@ const ModalEmail = () => {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button onClick={handleClose} color="primary">
+          <Button type="submit" onClick={handleClose} color="primary">
             Send
           </Button>
         </DialogActions>
