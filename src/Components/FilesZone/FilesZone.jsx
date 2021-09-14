@@ -62,7 +62,7 @@ const Files = () => {
               color="primary"
               type="submit"
               onClick={handleSubmit}>
-              Submit
+              Upload
             </Button>
           </Box>
         </form>

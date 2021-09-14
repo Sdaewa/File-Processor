@@ -1,44 +1,16 @@
 import React from "react";
-
-import { makeStyles } from "@material-ui/core/styles";
 import Button from "@material-ui/core/Button";
-import Modal from "@material-ui/core/Modal";
-
-function rand() {
-  return Math.round(Math.random() * 20) - 10;
-}
-
-function getModalStyle() {
-  const top = 50 + rand();
-  const left = 50 + rand();
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`,
-  };
-}
-
-const useStyles = makeStyles((theme) => ({
-  modal: {
-    display: "flex",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  paper: {
-    position: "absolute",
-    width: 450,
-    backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing(2, 4, 3),
-  },
-}));
+import TextField from "@material-ui/core/TextField";
+import Dialog from "@material-ui/core/Dialog";
+import DialogActions from "@material-ui/core/DialogActions";
+import DialogContent from "@material-ui/core/DialogContent";
+import DialogContentText from "@material-ui/core/DialogContentText";
+import DialogTitle from "@material-ui/core/DialogTitle";
 
 const ModalEmail = () => {
-  const classes = useStyles();
-  const [modalStyle] = React.useState(getModalStyle);
   const [open, setOpen] = React.useState(false);
 
-  const handleOpen = () => {
+  const handleClickOpen = () => {
     setOpen(true);
   };
 
@@ -48,23 +20,36 @@ const ModalEmail = () => {
 
   return (
     <div>
-      <Button variant="contained" color="primary" onClick={handleOpen}>
-        Open Modal
+      <h1>Send PDF by email</h1>
+      <Button variant="contained" color="primary" onClick={handleClickOpen}>
+        Send by email
       </Button>
-
-      <Modal
-        aria-labelledby="simple-modal-title"
-        aria-describedby="simple-modal-description"
+      <Dialog
         open={open}
-        onClose={handleClose}>
-        <div style={modalStyle} className={classes.paper}>
-          <h2>Simple React Modal</h2>
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi
-            accumsan odio enim, non pharetra est ultrices et.
-          </p>
-        </div>
-      </Modal>
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title">
+        <DialogContent>
+          <DialogContentText>
+            Please enter an email address to send PDF to
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Email Address"
+            type="email"
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button onClick={handleClose} color="primary">
+            Send
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 };
