@@ -13,27 +13,33 @@ import {
 const ModalEmail = () => {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
-  const emailRef = useRef();
+  const emailVal = useRef();
 
-  const emailInput = emailRef.current;
-  console.log(emailInput);
-  // setEmail(emailInput);
+  // const onChange = (e) => {
+  //   e.preventDefault();
+  //   const value = e.target.value;
+  //   console.log(value);
+  //   setEmail(value);
+  // };
+
+  setEmail(emailVal.current);
+
   const postEmail = () => {
     axios
-      .get("/sendByEmail", {
-        method: "POST",
-      })
+      .post("http://localhost:8000/sendByEmail", email)
       .then((res) => {
         res.json();
         console.log(res);
       })
       .then((data) => {
+        console.log(data);
         alert(data.message);
         setEmail("");
       })
       .catch((err) => {
         console.log(err);
       });
+    handleClose();
   };
 
   const handleClickOpen = () => {
@@ -41,7 +47,6 @@ const ModalEmail = () => {
   };
 
   const handleClose = () => {
-    postEmail();
     setOpen(false);
   };
 
@@ -59,21 +64,22 @@ const ModalEmail = () => {
           <DialogContentText>
             Please enter an email address to send PDF to
           </DialogContentText>
-          <TextField
-            autoFocus
-            inputRef={emailRef}
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-          />
+          {/* <TextField
+              autoFocus
+              inputRef={emailRef}
+              margin="dense"
+              id="name"
+              label="Email Address"
+              type="email"
+              fullWidth
+            /> */}
+          <input ref={emailVal} id="email" />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button type="submit" onClick={handleClose} color="primary">
+          <Button type="submit" onClick={postEmail} color="primary">
             Send
           </Button>
         </DialogActions>
