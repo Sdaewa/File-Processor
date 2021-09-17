@@ -13,24 +13,35 @@ import {
 const ModalEmail = () => {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
-  const emailVal = useRef();
+  // const emailVal = useRef();
 
-  // const onChange = (e) => {
-  //   e.preventDefault();
-  //   const value = e.target.value;
-  //   console.log(value);
-  //   setEmail(value);
-  // };
-
-  setEmail(emailVal.current);
+  const onChange = (e) => {
+    e.preventDefault();
+    const value = e.target.value;
+    console.log("value", value);
+    setEmail(value);
+  };
 
   const postEmail = () => {
-    axios
-      .post("http://localhost:8000/sendByEmail", email)
-      .then((res) => {
-        res.json();
-        console.log(res);
-      })
+    // setEmail(emailVal);
+    console.log("emailconfig", email);
+    axios({
+      method: "POST",
+      url: "http://localhost:8000/sendByEmail",
+      data: {
+        emailAddress: email,
+      },
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      // headers: { "Content-Type": "multipart/form-data" },
+    })
+      // .then((res) => {
+      //   console.log("response");
+      //   res.json();
+      //   console.log(res);
+      // })
       .then((data) => {
         console.log(data);
         alert(data.message);
@@ -73,7 +84,7 @@ const ModalEmail = () => {
               type="email"
               fullWidth
             /> */}
-          <input ref={emailVal} id="email" />
+          <input onChange={onChange} id="email" />
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">
