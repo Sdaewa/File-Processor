@@ -26,6 +26,7 @@ const ModalEmail = () => {
     axios({
       method: "POST",
       url: "http://localhost:8000/sendByEmail",
+
       data: {
         emailAddress: email,
       },
