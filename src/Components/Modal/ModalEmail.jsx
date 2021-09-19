@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 
 import {
@@ -22,7 +22,6 @@ const ModalEmail = () => {
   };
 
   const postEmail = () => {
-    // setEmail(emailVal);
     axios({
       method: "POST",
       url: "http://localhost:8000/sendByEmail",
