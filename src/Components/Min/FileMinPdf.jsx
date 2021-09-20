@@ -3,8 +3,8 @@ import axios from "axios";
 
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ProgressBar from "../UI/ProgressBar";
 import { Button } from "@material-ui/core";
+import ProgressBar from "../UI/ProgressBar";
 
 const FileDownload = () => {
   const [isLoaded, setIsLoaded] = useState(0);
@@ -33,7 +33,6 @@ const FileDownload = () => {
 
   return (
     <div id="container">
-      <h1>Minimize PDF</h1>
       <ProgressBar value={isLoaded} />
       <Button
         variant="contained"

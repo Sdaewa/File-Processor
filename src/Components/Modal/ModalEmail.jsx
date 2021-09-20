@@ -59,9 +59,8 @@ const ModalEmail = () => {
 
   return (
     <div>
-      <h1>Send PDF by email</h1>
       <Button variant="contained" color="primary" onClick={handleClickOpen}>
-        Send by email
+        Enter email
       </Button>
       <Dialog
         open={open}
