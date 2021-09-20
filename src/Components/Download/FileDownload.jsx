@@ -11,7 +11,7 @@ const FileDownload = () => {
 
   const download = () => {
     axios
-      .get("http://localhost:8000/convertToPdf", {
+      .get(process.env.TO_PDF_URL, {
         onDownloadProgress: (ProgressEvent) => {
           setIsLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
         },

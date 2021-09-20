@@ -24,7 +24,7 @@ const ModalEmail = () => {
   const postEmail = () => {
     axios({
       method: "POST",
-      url: "http://localhost:8000/sendByEmail",
+      url: process.env.SEND_EMAIL_URL,
 
       data: {
         emailAddress: email,
@@ -80,7 +80,6 @@ const ModalEmail = () => {
             type="email"
             fullWidth
           />
-          {/* <input /> */}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose} color="primary">

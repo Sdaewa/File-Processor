@@ -24,10 +24,6 @@ const FileUpload = ({
   const fileInputField = useRef();
   const [files, setFiles] = useState({});
 
-  // const handleUploadBtnClick = () => {
-  //   fileInputField.current.click();
-  // };
-
   const addNewFiles = (newFiles) => {
     for (let file of newFiles) {
       if (file.size < maxFileSizeInBytes) {
@@ -122,12 +118,7 @@ const FileUpload = ({
         />
         <Container className={classes.fileUploadContainer}>
           <p>Drag and drop your files anywhere</p>
-          <Button
-            variant="outlined"
-            color="primary"
-            type="button"
-            // onClick={handleUploadBtnClick}
-          >
+          <Button variant="outlined" color="primary" type="button">
             <i className="fas fa-file-upload" />
             <span> Upload {otherProps.multiple ? "files" : "a file"}</span>
           </Button>

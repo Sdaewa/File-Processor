@@ -28,7 +28,7 @@ const Files = () => {
     }
 
     axios
-      .post("http://localhost:8000/", data, {
+      .post(process.env.UPLOAD_URL, data, {
         headers: {
           // encoding: null,
           encoding: "binary",
