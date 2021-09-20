@@ -9,8 +9,10 @@ import {
   CardActions,
   CardHeader,
   Grid,
+  Link,
   Container,
 } from "@material-ui/core";
+import GitHubIcon from "@material-ui/icons/GitHub";
 import "react-toastify/dist/ReactToastify.css";
 import FilesZone from "./Components/FilesZone/FilesZone";
 import useStyles from "./Components/Upload/UploadStyles";
@@ -20,6 +22,16 @@ import ModalEmail from "./Components/Modal/ModalEmail";
 
 const App = () => {
   const classes = useStyles();
+
+  const Github = () => {
+    return (
+      <Typography align="center" variant="body2" color="textSecondary">
+        <Link color="inherit" href="https://github.com/sdaewa" target="_blank">
+          <GitHubIcon />
+        </Link>
+      </Typography>
+    );
+  };
 
   return (
     <>
@@ -126,16 +138,12 @@ const App = () => {
       </main>
 
       <footer className={classes.footer}>
-        <Typography variant="h6" align="center" gutterBottom>
-          Footer
-        </Typography>
-        <Typography
-          variant="subtitle1"
-          align="center"
-          color="textSecondary"
-          component="p">
-          Something here to give the footer a purpose!
-        </Typography>
+        <Container maxWidth="sm">
+          <Typography align="center" variant="body1">
+            Luis Ramirez
+          </Typography>
+          <Github />
+        </Container>
       </footer>
     </>
   );
