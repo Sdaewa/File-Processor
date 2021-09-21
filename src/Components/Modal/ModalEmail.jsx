@@ -8,21 +8,16 @@ import {
   DialogActions,
   DialogContent,
   DialogContentText,
-  Container,
-  Card,
-  CardActions,
-  CardHeader,
-  Grid,
-  Box,
-  CardContent,
   CssBaseline,
 } from "@material-ui/core";
+
 import ProgressBar from "../UI/ProgressBar";
 
 const ModalEmail = () => {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [isLoaded, setIsLoaded] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onChange = (e) => {
     e.preventDefault();
@@ -58,6 +53,7 @@ const ModalEmail = () => {
       .then((data) => {
         console.log(data);
         alert(data.message);
+        setIsLoading(false);
         setEmail("");
       })
       .catch((err) => {
@@ -74,32 +70,12 @@ const ModalEmail = () => {
     setOpen(false);
   };
 
+  const loadIcon = <ProgressBar value={isLoaded} />;
+
   return (
     <>
       <CssBaseline />
-      {/* <Container maxWidth="md" component="main">
-        <Grid container spacing={5} alignItems="flex-end">
-          <Grid item xs={12} sm={6} md={4}>
-            <Card>
-              <CardHeader
-                title={"Send PDF to email"}
-                titleTypographyProps={{ align: "center" }}
-                subheaderTypographyProps={{
-                  align: "center",
-                }}
-              />
-              <CardContent>
-                <Box
-                  sx={{
-                    display: "flex",
-                    justifyContent: "center",
-                    alignItems: "baseline",
-                    mb: 2,
-                  }}>
-                  <ProgressBar value={isLoaded} />
-                </Box>
-              </CardContent>
-              <CardActions> */}
+      {isLoading && { loadIcon }}
       <Button variant="contained" color="primary" onClick={handleClickOpen}>
         Enter email
       </Button>
@@ -130,11 +106,6 @@ const ModalEmail = () => {
           </Button>
         </DialogActions>
       </Dialog>
-      {/* </CardActions>
-            </Card>
-          </Grid>
-        </Grid>
-      </Container> */}
     </>
   );
 };

@@ -7,7 +7,6 @@ import {
   Typography,
   Link,
   Container,
-  Box,
 } from "@material-ui/core";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import "react-toastify/dist/ReactToastify.css";

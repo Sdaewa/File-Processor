@@ -4,26 +4,18 @@ import axios from "axios";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProgressBar from "../UI/ProgressBar";
-import {
-  Button,
-  Container,
-  Card,
-  CardActions,
-  CardHeader,
-  Grid,
-  Box,
-  CardContent,
-  CssBaseline,
-} from "@material-ui/core";
+import { Button, CssBaseline } from "@material-ui/core";
 
 const FileDownload = () => {
   const [isLoaded, setIsLoaded] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const download = () => {
     axios
       .get(process.env.TO_PDF_URL, {
         onDownloadProgress: (ProgressEvent) => {
           setIsLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
+          setIsLoading(true);
         },
       })
       .then((res) => {
@@ -35,25 +27,20 @@ const FileDownload = () => {
         a.download = "newDocument.pdf";
         a.click();
         toast.success("Download Successful");
+        setIsLoading(false);
       })
       .catch((e) => {
         toast.error("Download Failed");
       });
   };
 
+  const loadIcon = <ProgressBar value={isLoaded} />;
+
   return (
     <>
       <CssBaseline />
-      {/* <Container maxWidth="md" component="main">
-        <Grid container spacing={5} alignItems="flex-end"> */}
-      {/* <Grid item xs={12} sm={6} md={4}> */}
-      {/* <Card>
-        <CardContent>
-          <Box>
-            <ProgressBar value={isLoaded} />
-          </Box>
-        </CardContent>
-        <CardActions> */}
+      {isLoading && { loadIcon }}
+
       <Button
         variant="contained"
         color="primary"
@@ -61,11 +48,6 @@ const FileDownload = () => {
         onClick={download}>
         Download
       </Button>
-      {/* </CardActions>
-      </Card> */}
-      {/* </Grid> */}
-      {/* </Grid>
-      </Container> */}
     </>
   );
 };

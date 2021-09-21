@@ -11,7 +11,6 @@ import {
   CardContent,
   Container,
 } from "@material-ui/core";
-// import GlobalStyles from "@mui/material/GlobalStyles";
 import FileDownload from "../Download/FileDownload";
 import FileMinPdf from "../Min/FileMinPdf";
 import ModalEmail from "../Modal/ModalEmail";
@@ -34,9 +33,6 @@ const options = [
 const Main = () => {
   return (
     <>
-      {/* <GlobalStyles
-        styles={{ ul: { margin: 0, padding: 0, listStyle: "none" } }}
-      /> */}
       <CssBaseline />
 
       <Container maxWidth="md" component="main">
