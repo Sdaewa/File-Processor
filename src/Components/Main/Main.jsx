@@ -1,4 +1,4 @@
-// import React from "react";
+import React from "react";
 
 import {
   Card,
@@ -10,20 +10,14 @@ import {
   Button,
   CardContent,
   CssBaseline,
-  Toolbar,
-  Link,
-  Typography,
-  AppBar,
 } from "@material-ui/core";
 import FileDownload from "../Download/FileDownload";
 import FileMinPdf from "../Min/FileMinPdf";
 import ModalEmail from "../Modal/ModalEmail";
 
-import * as React from "react";
-
 const options = [
   {
-    title: "Download",
+    title: "Download PDF",
     comp: <FileDownload />,
   },
   {
@@ -31,7 +25,7 @@ const options = [
     comp: <FileMinPdf />,
   },
   {
-    title: "Sent to email",
+    title: "Send to email",
     comp: <ModalEmail />,
   },
 ];
@@ -43,7 +37,6 @@ const Main = () => {
       <Container maxWidth="md" component="main">
         <Grid container spacing={5} alignItems="flex-end">
           {options.map((opt) => (
-            // Enterprise card is full width at sm breakpoint
             <Grid item key={opt.title} xs={12} sm={6} md={4}>
               <Card>
                 <CardHeader
