@@ -7,14 +7,13 @@ import {
   Typography,
   Link,
   Container,
+  Box,
 } from "@material-ui/core";
 import GitHubIcon from "@material-ui/icons/GitHub";
 import "react-toastify/dist/ReactToastify.css";
 import useStyles from "./Components/Upload/UploadStyles";
 import FilesZone from "./Components/FilesZone/FilesZone";
-import ModalEmail from "./Components/Modal/ModalEmail";
-import FileMinPdf from "./Components/Min/FileMinPdf";
-import FileDownload from "./Components/Min/FileMinPdf";
+import Main from "./Components/Main/Main";
 
 const App = () => {
   const classes = useStyles();
@@ -45,11 +44,7 @@ const App = () => {
       </AppBar>
       <main>
         <FilesZone />
-        <Container maxWidth="md" component="main">
-          <FileDownload />
-          <FileMinPdf />
-          <ModalEmail />
-        </Container>
+        <Main />
       </main>
 
       <footer className={classes.footer}>

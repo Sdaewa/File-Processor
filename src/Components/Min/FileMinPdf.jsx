@@ -44,7 +44,7 @@ const FileDownload = () => {
   return (
     <>
       <CssBaseline />
-      <Container maxWidth="md" component="main">
+      {/* <Container maxWidth="md" component="main">
         <Grid container spacing={5} alignItems="flex-end">
           <Grid item xs={12} sm={6} md={4}>
             <Card>
@@ -66,19 +66,19 @@ const FileDownload = () => {
                   <ProgressBar value={isLoaded} />
                 </Box>
               </CardContent>
-              <CardActions>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  type="button"
-                  onClick={download}>
-                  Download
-                </Button>
-              </CardActions>
+              <CardActions> */}
+      <Button
+        variant="contained"
+        color="primary"
+        type="button"
+        onClick={download}>
+        Download
+      </Button>
+      {/* </CardActions>
             </Card>
           </Grid>
         </Grid>
-      </Container>
+      </Container> */}
     </>
   );
 };

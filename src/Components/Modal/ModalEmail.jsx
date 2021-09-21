@@ -77,7 +77,7 @@ const ModalEmail = () => {
   return (
     <>
       <CssBaseline />
-      <Container maxWidth="md" component="main">
+      {/* <Container maxWidth="md" component="main">
         <Grid container spacing={5} alignItems="flex-end">
           <Grid item xs={12} sm={6} md={4}>
             <Card>
@@ -99,45 +99,42 @@ const ModalEmail = () => {
                   <ProgressBar value={isLoaded} />
                 </Box>
               </CardContent>
-              <CardActions>
-                <Button
-                  variant="contained"
-                  color="primary"
-                  onClick={handleClickOpen}>
-                  Enter email
-                </Button>
-                <Dialog
-                  open={open}
-                  onClose={handleClose}
-                  aria-labelledby="form-dialog-title">
-                  <DialogContent>
-                    <DialogContentText>
-                      Please enter an email address to send PDF to
-                    </DialogContentText>
-                    <TextField
-                      autoFocus
-                      margin="dense"
-                      onChange={onChange}
-                      id="email"
-                      label="Email Address"
-                      type="email"
-                      fullWidth
-                    />
-                  </DialogContent>
-                  <DialogActions>
-                    <Button onClick={handleClose} color="primary">
-                      Cancel
-                    </Button>
-                    <Button type="submit" onClick={postEmail} color="primary">
-                      Send
-                    </Button>
-                  </DialogActions>
-                </Dialog>
-              </CardActions>
+              <CardActions> */}
+      <Button variant="contained" color="primary" onClick={handleClickOpen}>
+        Enter email
+      </Button>
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="form-dialog-title">
+        <DialogContent>
+          <DialogContentText>
+            Please enter an email address to send PDF to
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            onChange={onChange}
+            id="email"
+            label="Email Address"
+            type="email"
+            fullWidth
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+          <Button type="submit" onClick={postEmail} color="primary">
+            Send
+          </Button>
+        </DialogActions>
+      </Dialog>
+      {/* </CardActions>
             </Card>
           </Grid>
         </Grid>
-      </Container>
+      </Container> */}
     </>
   );
 };
