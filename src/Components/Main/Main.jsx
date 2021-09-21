@@ -1,78 +1,46 @@
-import React from "react";
+// import React from "react";
 
-import {
-  Card,
-  CardActions,
-  CardHeader,
-  Grid,
-  Container,
-  Box,
-  Button,
-  CardContent,
-  CssBaseline,
-} from "@material-ui/core";
-import FileDownload from "../Download/FileDownload";
-import FileMinPdf from "../Min/FileMinPdf";
-import ModalEmail from "../Modal/ModalEmail";
+// import {
+//   Card,
+//   CardActions,
+//   CardHeader,
+//   Grid,
+//   Container,
+//   Box,
+//   Button,
+//   CardContent,
+//   CssBaseline,
+// } from "@material-ui/core";
+// import FileDownload from "../Download/FileDownload";
+// import FileMinPdf from "../Min/FileMinPdf";
+// import ModalEmail from "../Modal/ModalEmail";
 
-const options = [
-  {
-    title: "Download PDF",
-    comp: <FileDownload />,
-  },
-  {
-    title: "Minimize PDF",
-    comp: <FileMinPdf />,
-  },
-  {
-    title: "Send to email",
-    comp: <ModalEmail />,
-  },
-];
+// const options = [
+//   {
+//     title: "Download PDF",
+//     comp: <FileDownload />,
+//   },
+//   {
+//     title: "Minimize PDF",
+//     comp: <FileMinPdf />,
+//   },
+//   {
+//     title: "Send to email",
+//     comp: <ModalEmail />,
+//   },
+// ];
 
-const Main = () => {
-  return (
-    <>
-      <CssBaseline />
-      <Container maxWidth="md" component="main">
-        <Grid container spacing={5} alignItems="flex-end">
-          {options.map((opt) => (
-            <Grid item key={opt.title} xs={12} sm={6} md={4}>
-              <Card>
-                <CardHeader
-                  title={opt.title}
-                  titleTypographyProps={{ align: "center" }}
-                  subheaderTypographyProps={{
-                    align: "center",
-                  }}
-                  sx={{
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === "light"
-                        ? theme.palette.grey[200]
-                        : theme.palette.grey[700],
-                  }}
-                />
-                <CardContent>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "baseline",
-                      mb: 2,
-                    }}></Box>
-                </CardContent>
-                <CardActions>
-                  <Button fullWidth variant={opt.buttonVariant}>
-                    {opt.comp}
-                  </Button>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
-      </Container>
-    </>
-  );
-};
+// const Main = () => {
+//   return (
+//     <>
+//       <CssBaseline />
+//       <Grid container spacing={5} alignItems="flex-end">
+//         <Grid item xs={12} sm={6} md={4}>
 
-export default Main;
+//         </Grid>
+//       </Grid>
+//     </>
+//   );
+// };
+
+// export default Main;
