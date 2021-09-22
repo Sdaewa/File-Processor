@@ -11,13 +11,9 @@ import {
   CssBaseline,
 } from "@material-ui/core";
 
-import ProgressBar from "../UI/ProgressBar";
-
 const ModalEmail = () => {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
-  const [isLoaded, setIsLoaded] = useState(0);
-  const [isLoading, setIsLoading] = useState(false);
 
   const onChange = (e) => {
     e.preventDefault();
@@ -27,42 +23,24 @@ const ModalEmail = () => {
   };
 
   const postEmail = () => {
-    axios(
-      {
-        method: "POST",
-        url: "http://localhost:8000/sendByEmail",
+    axios({
+      method: "POST",
+      url: "http://localhost:8000/sendByEmail",
 
-        data: {
-          emailAddress: email,
-        },
-        headers: {
-          "Content-Type": "application/json",
-        },
+      data: {
+        emailAddress: email,
       },
-      {
-        onDownloadProgress: (ProgressEvent) => {
-          setIsLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
-        },
-      }
-    )
+      headers: {
+        "Content-Type": "application/json",
+      },
+    })
       .then((res) => {
-        if (res.statusText === "BAD") {
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 6000);
-          console.log("error");
-        }
         console.log("response");
-        res.json();
-        console.log(res);
       })
       .then((data) => {
         console.log(data);
         alert(data.message);
         setEmail("");
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 6000);
       })
       .catch((err) => {
         console.log(err);
@@ -78,19 +56,12 @@ const ModalEmail = () => {
     setOpen(false);
   };
 
-  const loadIcon = <ProgressBar value={isLoaded} />;
-
   return (
     <>
       <CssBaseline />
-      {isLoading === true ? (
-        loadIcon
-      ) : (
-        <Button variant="contained" color="primary" onClick={handleClickOpen}>
-          Enter email
-        </Button>
-      )}
-
+      <Button variant="contained" color="primary" onClick={handleClickOpen}>
+        Enter email
+      </Button>
       <Dialog
         open={open}
         onClose={handleClose}
@@ -113,13 +84,7 @@ const ModalEmail = () => {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button
-            type="submit"
-            onClick={() => {
-              setIsLoading(true);
-              postEmail();
-            }}
-            color="primary">
+          <Button type="submit" onClick={postEmail} color="primary">
             Send
           </Button>
         </DialogActions>
