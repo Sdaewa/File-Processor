@@ -18,12 +18,18 @@ const FileDownload = () => {
         },
       })
       .then((res) => {
+        if (res.statusText === "BAD") {
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 6000);
+          console.log("error");
+        }
         const data = new Buffer.from(res.data).toString("base64");
         const blob = new Blob([data], { type: "application/pdf" });
         let url = window.URL.createObjectURL(blob);
         let a = document.createElement("a");
         a.href = url;
-        a.download = "newDocument.pdf";
+        // a.download = "newDocument.pdf";
         a.click();
         toast.success("Download Successful");
         setTimeout(() => {
@@ -32,9 +38,6 @@ const FileDownload = () => {
       })
       .catch((e) => {
         toast.error("Download Failed");
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 6000);
       });
   };
 

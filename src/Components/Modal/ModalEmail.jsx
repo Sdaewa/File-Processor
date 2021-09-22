@@ -46,6 +46,12 @@ const ModalEmail = () => {
       }
     )
       .then((res) => {
+        if (res.statusText === "BAD") {
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 6000);
+          console.log("error");
+        }
         console.log("response");
         res.json();
         console.log(res);
@@ -60,9 +66,6 @@ const ModalEmail = () => {
       })
       .catch((err) => {
         console.log(err);
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 6000);
       });
     handleClose();
   };

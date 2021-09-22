@@ -18,6 +18,12 @@ const FileDownload = () => {
         },
       })
       .then((res) => {
+        if (res.statusText === "bad") {
+          setTimeout(() => {
+            setIsLoading(false);
+          }, 6000);
+          console.log("error");
+        }
         const data = new Buffer.from(res.data).toString("base64");
         const blob = new Blob([data], { type: "application/pdf" });
         let url = window.URL.createObjectURL(blob);
@@ -31,10 +37,9 @@ const FileDownload = () => {
         }, 6000);
       })
       .catch((e) => {
+        console.log(e);
+        setIsLoading(false);
         toast.error("Download Failed");
-        setTimeout(() => {
-          setIsLoading(false);
-        }, 6000);
       });
   };
 
