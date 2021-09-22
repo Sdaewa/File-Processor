@@ -53,11 +53,16 @@ const ModalEmail = () => {
       .then((data) => {
         console.log(data);
         alert(data.message);
-        setIsLoading(false);
         setEmail("");
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 6000);
       })
       .catch((err) => {
         console.log(err);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 6000);
       });
     handleClose();
   };
@@ -75,10 +80,14 @@ const ModalEmail = () => {
   return (
     <>
       <CssBaseline />
-      {isLoading && { loadIcon }}
-      <Button variant="contained" color="primary" onClick={handleClickOpen}>
-        Enter email
-      </Button>
+      {isLoading === true ? (
+        loadIcon
+      ) : (
+        <Button variant="contained" color="primary" onClick={handleClickOpen}>
+          Enter email
+        </Button>
+      )}
+
       <Dialog
         open={open}
         onClose={handleClose}
@@ -101,7 +110,13 @@ const ModalEmail = () => {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button type="submit" onClick={postEmail} color="primary">
+          <Button
+            type="submit"
+            onClick={() => {
+              setIsLoading(true);
+              postEmail();
+            }}
+            color="primary">
             Send
           </Button>
         </DialogActions>

@@ -26,10 +26,15 @@ const FileDownload = () => {
         // a.download = "newDocument.pdf";
         a.click();
         toast.success("Download Successful");
-        setIsLoading(false);
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 6000);
       })
       .catch((e) => {
         toast.error("Download Failed");
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 6000);
       });
   };
 
@@ -38,14 +43,20 @@ const FileDownload = () => {
   return (
     <>
       <CssBaseline />
-      {isLoading && { loadIcon }}
-      <Button
-        variant="contained"
-        color="primary"
-        type="button"
-        onClick={download}>
-        Download
-      </Button>
+      {isLoading === true ? (
+        loadIcon
+      ) : (
+        <Button
+          variant="contained"
+          color="primary"
+          type="button"
+          onClick={() => {
+            setIsLoading(true);
+            download();
+          }}>
+          Download
+        </Button>
+      )}
     </>
   );
 };
