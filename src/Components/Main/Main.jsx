@@ -13,18 +13,24 @@ import {
 import FileDownload from "../Download/FileDownload";
 import FileMinPdf from "../Min/FileMinPdf";
 import ModalEmail from "../Modal/ModalEmail";
+import FileDownloadRoundedIcon from "@mui/icons-material/FileDownloadRounded";
+import CompressRoundedIcon from "@mui/icons-material/CompressRounded";
+import SendRoundedIcon from "@mui/icons-material/SendRounded";
 
 const options = [
   {
     title: "Download PDF",
+    icon: <FileDownloadRoundedIcon />,
     comp: <FileDownload />,
   },
   {
     title: "Minimize PDF",
+    icon: <CompressRoundedIcon />,
     comp: <FileMinPdf />,
   },
   {
     title: "Send to email",
+    icon: <SendRoundedIcon />,
     comp: <ModalEmail />,
   },
 ];
@@ -52,7 +58,9 @@ const Main = () => {
                       justifyContent: "center",
                       alignItems: "baseline",
                       mb: 2,
-                    }}></Box>
+                    }}>
+                    {opt.icon}
+                  </Box>
                 </CardContent>
                 <CardActions>{opt.comp}</CardActions>
               </Card>
