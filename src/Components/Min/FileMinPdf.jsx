@@ -12,7 +12,7 @@ const FileDownload = () => {
 
   const download = () => {
     axios
-      .get(process.env.MIN_PDF_URL, {
+      .get("http://localhost:8000/convertToMin", {
         onDownloadProgress: (ProgressEvent) => {
           setIsLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
         },

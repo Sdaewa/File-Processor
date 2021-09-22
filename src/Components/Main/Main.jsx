@@ -6,7 +6,6 @@ import {
   CardHeader,
   Grid,
   Box,
-  Button,
   CssBaseline,
   CardContent,
   Container,
@@ -34,7 +33,6 @@ const Main = () => {
   return (
     <>
       <CssBaseline />
-
       <Container maxWidth="md" component="main">
         <Grid container spacing={5} alignItems="flex-end">
           {options.map((opt) => (
@@ -46,12 +44,6 @@ const Main = () => {
                   subheaderTypographyProps={{
                     align: "center",
                   }}
-                  sx={{
-                    backgroundColor: (theme) =>
-                      theme.palette.mode === "light"
-                        ? theme.palette.grey[200]
-                        : theme.palette.grey[700],
-                  }}
                 />
                 <CardContent>
                   <Box
@@ -62,9 +54,7 @@ const Main = () => {
                       mb: 2,
                     }}></Box>
                 </CardContent>
-                <CardActions>
-                  <Button>{opt.comp}</Button>
-                </CardActions>
+                <CardActions>{opt.comp}</CardActions>
               </Card>
             </Grid>
           ))}

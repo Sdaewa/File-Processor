@@ -26,9 +26,9 @@ const Files = () => {
     for (let i = 0; i < newInfo.files.length; i++) {
       data.append("file", newInfo.files[i]);
     }
-
+    console.log(data);
     axios
-      .post(process.env.UPLOAD_URL, data, {
+      .post("http://localhost:8000/", data, {
         headers: {
           // encoding: null,
           encoding: "binary",
@@ -37,10 +37,13 @@ const Files = () => {
           setIsLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
         },
       })
+
       .then((res) => {
+        console.log(res.body);
         toast.success("upload success");
       })
       .catch((e) => {
+        console.log(e.message);
         toast.error("upload fail");
       });
   };

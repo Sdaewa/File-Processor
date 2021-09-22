@@ -12,10 +12,9 @@ const FileDownload = () => {
 
   const download = () => {
     axios
-      .get(process.env.TO_PDF_URL, {
+      .get("http://localhost:8000/convertToPdf", {
         onDownloadProgress: (ProgressEvent) => {
           setIsLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
-          setIsLoading(true);
         },
       })
       .then((res) => {
@@ -27,7 +26,7 @@ const FileDownload = () => {
         a.download = "newDocument.pdf";
         a.click();
         toast.success("Download Successful");
-        setIsLoading(false);
+        // setIsLoading(false);
       })
       .catch((e) => {
         toast.error("Download Failed");
@@ -39,15 +38,20 @@ const FileDownload = () => {
   return (
     <>
       <CssBaseline />
-      {isLoading && { loadIcon }}
-
-      <Button
-        variant="contained"
-        color="primary"
-        type="button"
-        onClick={download}>
-        Download
-      </Button>
+      {isLoading === true ? (
+        loadIcon
+      ) : (
+        <Button
+          variant="contained"
+          color="primary"
+          type="button"
+          onClick={() => {
+            setIsLoading(true);
+            download();
+          }}>
+          Download
+        </Button>
+      )}
     </>
   );
 };

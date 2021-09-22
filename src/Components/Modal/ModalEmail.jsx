@@ -30,7 +30,7 @@ const ModalEmail = () => {
     axios(
       {
         method: "POST",
-        url: process.env.SEND_EMAIL_URL,
+        url: "http://localhost:8000/sendByEmail",
 
         data: {
           emailAddress: email,
