@@ -41,7 +41,7 @@ const App = () => {
           </Typography>
         </Toolbar>
       </AppBar>
-      <main>
+      <main style={{ marginBottom: "50px" }}>
         <SendFile />
         <Main />
       </main>
@@ -49,10 +49,11 @@ const App = () => {
       <footer className={classes.footer}>
         <Container
           style={{
-            margin: "25px auto",
-            padding: "25px ",
+            margin: "25px auto 0 0 ",
+            padding: "25px auto  0 0  ",
             width: "100%",
-
+            bottom: "0",
+            backgroundColor: "#DEEDF0",
             alignItems: "center",
             position: "static",
           }}>
