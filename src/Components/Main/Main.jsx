@@ -9,6 +9,7 @@ import {
   CssBaseline,
   CardContent,
   Container,
+  Divider,
 } from "@material-ui/core";
 import FileDownload from "../Download/FileDownload";
 import FileMinPdf from "../Min/FileMinPdf";
@@ -40,7 +41,14 @@ const Main = () => {
     <>
       <CssBaseline />
       <Container maxWidth="md" component="main">
-        <Grid container spacing={5} alignItems="flex-end">
+        <div>
+          <Divider variant="middle" style={{ marginBottom: "20px" }} />
+        </div>
+        <Grid
+          container
+          spacing={5}
+          alignItems="flex-end"
+          style={{ marginBottom: "20px" }}>
           {options.map((opt) => (
             <Grid item key={opt.title} xs={12} sm={6} md={4}>
               <Card>
@@ -63,7 +71,11 @@ const Main = () => {
                   </Box>
                 </CardContent>
                 <CardActions>
-                  <Grid container direction="column" alignContent="center">
+                  <Grid
+                    container
+                    direction="column"
+                    alignContent="center"
+                    style={{ marginBottom: "20px" }}>
                     <Grid item>{opt.comp}</Grid>
                   </Grid>
                 </CardActions>

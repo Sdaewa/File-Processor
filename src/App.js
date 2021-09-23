@@ -47,7 +47,15 @@ const App = () => {
       </main>
 
       <footer className={classes.footer}>
-        <Container maxWidth="sm">
+        <Container
+          style={{
+            margin: "25px auto",
+            padding: "25px ",
+            width: "100%",
+
+            alignItems: "center",
+            position: "static",
+          }}>
           <Typography align="center" variant="body1">
             Luis Ramirez
           </Typography>

@@ -4,7 +4,7 @@ import axios from "axios";
 import { Button, Container, Box, Grid } from "@material-ui/core";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import ProgressBar from "../UI/ProgressBar";
+// import ProgressBar from "../UI/ProgressBar";
 import FileUpload from "../Upload/FileUpload";
 import useStyles from "../Upload/UploadStyles";
 
@@ -13,7 +13,7 @@ const Files = () => {
   const [newInfo, setNewInfo] = useState({
     files: [],
   });
-  const [isLoaded, setIsLoaded] = useState(0);
+  // const [isLoaded, setIsLoaded] = useState(0);
 
   const updateUploadedFiles = (files) =>
     setNewInfo({ ...newInfo, files: files });
@@ -33,9 +33,9 @@ const Files = () => {
           // encoding: null,
           encoding: "binary",
         },
-        onUploadProgress: (ProgressEvent) => {
-          setIsLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
-        },
+        // onUploadProgress: (ProgressEvent) => {
+        //   setIsLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
+        // },
       })
 
       .then((res) => {
@@ -66,9 +66,7 @@ const Files = () => {
               direction="column"
               alignContent="center"
               style={{ padding: "25px 25px", marginBottom: "40px" }}>
-              <Grid item>
-                <ProgressBar value={isLoaded} />
-              </Grid>
+              <Grid item>{/* <ProgressBar value={isLoaded} /> */}</Grid>
               <Grid item>
                 <Box className={classes.box}>
                   <Button
