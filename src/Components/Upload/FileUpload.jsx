@@ -120,7 +120,7 @@ const FileUpload = ({
           <p>Drag and drop your files anywhere</p>
           <Button variant="outlined" color="primary" type="button">
             <i className="fas fa-file-upload" />
-            <span> Upload {otherProps.multiple ? "files" : "a file"}</span>
+            <span> Upload Files</span>
           </Button>
           <input
             className={classes.input}
