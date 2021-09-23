@@ -49,11 +49,10 @@ const App = () => {
       <footer className={classes.footer}>
         <Container
           style={{
-            margin: "25px auto 0 0 ",
-            padding: "25px auto  0 0  ",
+            margin: "25px auto",
+            padding: "25px auto",
             width: "100%",
             bottom: "0",
-            backgroundColor: "#DEEDF0",
             alignItems: "center",
             position: "static",
           }}>
