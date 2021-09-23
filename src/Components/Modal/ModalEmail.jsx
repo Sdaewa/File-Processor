@@ -10,10 +10,15 @@ import {
   DialogContentText,
   CssBaseline,
 } from "@material-ui/core";
+import ProgressBar from "../UI/ProgressBar";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const ModalEmail = () => {
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
+  const [isLoaded, setIsLoaded] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
 
   const onChange = (e) => {
     e.preventDefault();
@@ -23,27 +28,53 @@ const ModalEmail = () => {
   };
 
   const postEmail = () => {
-    axios({
-      method: "POST",
-      url: "http://localhost:8000/sendByEmail",
+    axios
+      .post(
+        "http://localhost:8000/convertToPdf",
+        {
+          data: {
+            emailAddress: email,
+          },
+        },
+        {
+          onDownloadProgress: (ProgressEvent) => {
+            setIsLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
+          },
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      )
+      // axios({
+      //   method: "POST",
+      //   url: "http://localhost:8000/sendByEmail",
 
-      data: {
-        emailAddress: email,
-      },
-      headers: {
-        "Content-Type": "application/json",
-      },
-    })
+      //   data: {
+      //     emailAddress: email,
+      //   },
+      //   headers: {
+      //     "Content-Type": "application/json",
+      //   },
+      // })
       .then((res) => {
         console.log("response");
+        toast.success("Sending email successful");
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 6000);
       })
       .then((data) => {
         console.log(data);
         alert(data.message);
         setEmail("");
+        setTimeout(() => {
+          setIsLoading(false);
+        }, 6000);
       })
       .catch((err) => {
         console.log(err);
+        toast.error("Sending email failed");
+        setIsLoading(false);
       });
     handleClose();
   };
@@ -55,6 +86,8 @@ const ModalEmail = () => {
   const handleClose = () => {
     setOpen(false);
   };
+
+  const loadIcon = <ProgressBar value={isLoaded} />;
 
   return (
     <>
@@ -84,9 +117,19 @@ const ModalEmail = () => {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-          <Button type="submit" onClick={postEmail} color="primary">
-            Send
-          </Button>
+          {isLoading === true ? (
+            loadIcon
+          ) : (
+            <Button
+              type="submit"
+              onClick={() => {
+                setIsLoading(true);
+                postEmail();
+              }}
+              color="primary">
+              Send
+            </Button>
+          )}
         </DialogActions>
       </Dialog>
     </>
