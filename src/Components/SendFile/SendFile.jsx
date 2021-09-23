@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import axios from "axios";
 
-import { Button, Container, Box } from "@material-ui/core";
+import { Button, Container, Box, Grid } from "@material-ui/core";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProgressBar from "../UI/ProgressBar";
@@ -57,17 +57,31 @@ const Files = () => {
           hideProgressBar
         />
         <form>
-          <FileUpload updateFilesCb={updateUploadedFiles} multiple />
-          <ProgressBar value={isLoaded} />
-          <Box className={classes.box}>
-            <Button
-              variant="contained"
-              color="primary"
-              type="submit"
-              onClick={handleSubmit}>
-              Upload
-            </Button>
-          </Box>
+          <Container maxWidth="md" component="main">
+            {/* <Grid item> */}
+            <FileUpload updateFilesCb={updateUploadedFiles} multiple />
+            {/* </Grid> */}
+            <Grid
+              container
+              direction="column"
+              alignContent="center"
+              style={{ padding: "25px 25px", marginBottom: "40px" }}>
+              <Grid item>
+                <ProgressBar value={isLoaded} />
+              </Grid>
+              <Grid item>
+                <Box className={classes.box}>
+                  <Button
+                    variant="contained"
+                    color="primary"
+                    type="submit"
+                    onClick={handleSubmit}>
+                    Upload
+                  </Button>
+                </Box>
+              </Grid>
+            </Grid>
+          </Container>
         </form>
       </div>
     </Container>

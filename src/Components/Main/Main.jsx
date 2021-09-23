@@ -20,7 +20,7 @@ import SendRoundedIcon from "@mui/icons-material/SendRounded";
 const options = [
   {
     title: "Download PDF",
-    icon: <FileDownloadRoundedIcon />,
+    icon: <FileDownloadRoundedIcon fontSize="large" />,
     comp: <FileDownload />,
   },
   {
@@ -62,7 +62,11 @@ const Main = () => {
                     {opt.icon}
                   </Box>
                 </CardContent>
-                <CardActions>{opt.comp}</CardActions>
+                <CardActions>
+                  <Grid container direction="column" alignContent="center">
+                    <Grid item>{opt.comp}</Grid>
+                  </Grid>
+                </CardActions>
               </Card>
             </Grid>
           ))}

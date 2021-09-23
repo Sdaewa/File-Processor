@@ -11,7 +11,7 @@ import {
 import GitHubIcon from "@material-ui/icons/GitHub";
 import "react-toastify/dist/ReactToastify.css";
 import useStyles from "./Components/Upload/UploadStyles";
-import FilesZone from "./Components/FilesZone/FilesZone";
+import SendFile from "./Components/SendFile/SendFile";
 import Main from "./Components/Main/Main";
 
 const App = () => {
@@ -42,7 +42,7 @@ const App = () => {
         </Toolbar>
       </AppBar>
       <main>
-        <FilesZone />
+        <SendFile />
         <Main />
       </main>
 
