@@ -19,9 +19,7 @@ const FileDownload = () => {
       })
       .then((res) => {
         if (res.statusText === "bad") {
-          setTimeout(() => {
-            setIsLoading(false);
-          }, 6000);
+          setIsLoading(false);
           console.log("error");
         }
         const data = new Buffer.from(res.data).toString("base64");
@@ -34,7 +32,7 @@ const FileDownload = () => {
         toast.success("Download Successful");
         setTimeout(() => {
           setIsLoading(false);
-        }, 6000);
+        }, 4000);
       })
       .catch((e) => {
         console.log(e);
