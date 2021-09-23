@@ -12,7 +12,7 @@ const FileDownload = () => {
 
   const download = () => {
     axios
-      .get("http://localhost:8000/convertToPdf", {
+      .get("http://localhost:8000/downloadPdf", {
         onDownloadProgress: (ProgressEvent) => {
           setIsLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
         },
