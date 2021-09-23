@@ -29,7 +29,7 @@ const FileDownload = () => {
         let url = window.URL.createObjectURL(blob);
         let a = document.createElement("a");
         a.href = url;
-        // a.download = "newDocument.pdf";
+        a.download = "newMinDocument.pdf";
         a.click();
         toast.success("Download Successful");
         setTimeout(() => {

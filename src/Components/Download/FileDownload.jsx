@@ -18,6 +18,7 @@ const FileDownload = () => {
         },
       })
       .then((res) => {
+        console.log(res);
         if (res.statusText === "BAD") {
           setTimeout(() => {
             setIsLoading(false);
@@ -29,7 +30,7 @@ const FileDownload = () => {
         let url = window.URL.createObjectURL(blob);
         let a = document.createElement("a");
         a.href = url;
-        // a.download = "newDocument.pdf";
+        a.download = "newDocument.pdf";
         a.click();
         toast.success("Download Successful");
         setTimeout(() => {
