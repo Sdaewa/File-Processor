@@ -15,10 +15,8 @@ const Files = () => {
   });
   // const [isLoaded, setIsLoaded] = useState(0);
 
-  const updateUploadedFiles = (files) => {
+  const updateUploadedFiles = (files) =>
     setNewInfo({ ...newInfo, files: files });
-    console.log("state=>", files);
-  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -27,9 +25,8 @@ const Files = () => {
 
     for (let i = 0; i < newInfo.files.length; i++) {
       data.append("file", newInfo.files[i]);
-      console.log("hdlSbumit", data);
     }
-
+    console.log(data);
     axios
       .post("http://localhost:8000/upload", data, {
         headers: {
@@ -42,7 +39,7 @@ const Files = () => {
       })
 
       .then((res) => {
-        console.log("then res=>", res.body);
+        console.log(res.body);
         toast.success("upload success");
       })
       .catch((e) => {
