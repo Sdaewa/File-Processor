@@ -133,7 +133,7 @@ const FileUpload = ({
           />
         </Container>
         <article className={classes.filePreviewContainer}>
-          <span>To Upload</span>
+          <span>To Convert</span>
           <section className={classes.previewList}>
             {Object.keys(files).map((fileName, index) => {
               let file = files[fileName];

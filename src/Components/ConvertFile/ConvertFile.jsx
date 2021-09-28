@@ -8,7 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import FileUpload from "../Upload/FileUpload";
 import useStyles from "../Upload/UploadStyles";
 
-const Files = () => {
+const ConvertFile = () => {
   const classes = useStyles();
   const [newInfo, setNewInfo] = useState({
     files: [],
@@ -39,12 +39,16 @@ const Files = () => {
       })
 
       .then((res) => {
-        console.log(res.body);
-        toast.success("upload success");
+        console.log(res);
+        if (res.data === "No File selected !") {
+          toast.success("No File selected !");
+        } else {
+          toast.success("Convertion successful!");
+        }
       })
       .catch((e) => {
         console.log(e.message);
-        toast.error("upload fail");
+        toast.error("Convertion fail");
       });
   };
 
@@ -74,7 +78,7 @@ const Files = () => {
                     color="primary"
                     type="submit"
                     onClick={handleSubmit}>
-                    Upload
+                    Convert
                   </Button>
                 </Box>
               </Grid>
@@ -86,4 +90,4 @@ const Files = () => {
   );
 };
 
-export default Files;
+export default ConvertFile;
