@@ -17,7 +17,6 @@ import ModalEmail from "../Modal/ModalEmail";
 import FileDownloadRoundedIcon from "@mui/icons-material/FileDownloadRounded";
 import CompressRoundedIcon from "@mui/icons-material/CompressRounded";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
-import DeleteFile from "../DeleteFile/DeleteFile";
 
 const options = [
   {
@@ -45,7 +44,6 @@ const Main = () => {
         <div>
           <Divider variant="middle" style={{ marginBottom: "20px" }} />
         </div>
-        <DeleteFile />
         <Grid
           container
           spacing={5}

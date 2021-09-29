@@ -6,6 +6,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 // import ProgressBar from "../UI/ProgressBar";
 import FileUpload from "../Upload/FileUpload";
+import DeleteFile from "../DeleteFile/DeleteFile";
 import useStyles from "../Upload/UploadStyles";
 
 const ConvertFile = () => {
@@ -13,10 +14,11 @@ const ConvertFile = () => {
   const [newInfo, setNewInfo] = useState({
     files: [],
   });
-  // const [isLoaded, setIsLoaded] = useState(0);
+  const [thereIsFile, seTthereIsFile] = useState(false);
 
-  const updateUploadedFiles = (files) =>
+  const updateUploadedFiles = (files) => {
     setNewInfo({ ...newInfo, files: files });
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
@@ -44,6 +46,7 @@ const ConvertFile = () => {
           toast.success("No File selected !");
         } else {
           toast.success("Convertion successful!");
+          seTthereIsFile(true);
         }
       })
       .catch((e) => {
@@ -51,7 +54,6 @@ const ConvertFile = () => {
         toast.error("Convertion fail");
       });
   };
-
   return (
     <Container className={classes.dropZone}>
       <div className="form-group">
@@ -73,13 +75,17 @@ const ConvertFile = () => {
               <Grid item>{/* <ProgressBar value={isLoaded} /> */}</Grid>
               <Grid item>
                 <Box className={classes.box}>
-                  <Button
-                    variant="contained"
-                    color="primary"
-                    type="submit"
-                    onClick={handleSubmit}>
-                    Convert
-                  </Button>
+                  {thereIsFile ? (
+                    <DeleteFile />
+                  ) : (
+                    <Button
+                      variant="contained"
+                      color="primary"
+                      type="submit"
+                      onClick={handleSubmit}>
+                      Convert
+                    </Button>
+                  )}
                 </Box>
               </Grid>
             </Grid>

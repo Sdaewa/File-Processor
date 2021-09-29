@@ -17,6 +17,7 @@ const FileUpload = ({
   label,
   updateFilesCb,
   handlerSubmit,
+  onConvert,
   maxFileSizeInBytes = DEFAULT_MAX_FILE_SIZE_IN_BYTES,
   ...otherProps
 }) => {
@@ -47,65 +48,16 @@ const FileUpload = ({
     callUpdateFilesCb({ ...files });
   };
 
-  const checkMimeType = (e) => {
-    let files = e.target.files;
-    let err = []; // create empty array
-    const types = [
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.template",
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-      "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-      "application/pdf",
-      "application/msword",
-    ];
-    for (let i = 0; i < files.length; i++) {
-      if (types.every((type) => files[i].type !== type)) {
-        err[i] = files[i].type + " is not a supported format\n";
-        // assign message to array
-      }
-    }
-    for (let x = 0; x < err.length; x++) {
-      // loop create toast massage
-      e.target.value = null;
-      toast.error(err[x]);
-    }
-    return true;
-  };
-
-  const maxSelectFile = (e) => {
-    let files = e.target.files;
-    if (files.length > 3) {
-      const msg = "Only 3 image can be uploaded at a time";
-      e.target.value = null;
-      toast.warn(msg);
-      return false;
-    }
-    return true;
-  };
-
-  const checkFileSize = (e) => {
-    let files = e.target.files;
-    let size = 2000000;
-    let err = [];
-    for (var i = 0; i < files.length; i++) {
-      if (files[i].size > size) {
-        err[i] = files[i].type + "is too large, please pick a smaller file\n";
-      }
-    }
-    for (var x = 0; x < err.length; x++) {
-      toast.error(err[x]);
-      e.target.value = null;
-    }
-    return true;
-  };
-
   const handleNewFileUpload = (e) => {
     const { files: newFiles } = e.target;
     console.log(files);
-    if (maxSelectFile(e) && checkMimeType(e) && checkFileSize(e)) {
-      let updatedFiles = addNewFiles(newFiles);
-      setFiles(updatedFiles);
-      callUpdateFilesCb(updatedFiles);
-    }
+
+    let updatedFiles = addNewFiles(newFiles);
+    setFiles(updatedFiles);
+    callUpdateFilesCb(updatedFiles);
+    setTimeout(() => {
+      setFiles({});
+    }, 6000);
   };
 
   return (

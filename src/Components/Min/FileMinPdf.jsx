@@ -26,6 +26,7 @@ const FileDownload = () => {
         const blob = new Blob([data], { type: "application/pdf" });
         let url = window.URL.createObjectURL(blob);
         let a = document.createElement("a");
+        console.log(a);
         a.href = url;
         a.download = "newMinDocument.pdf";
         a.click();
