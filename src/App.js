@@ -11,7 +11,6 @@ import {
 import GitHubIcon from "@material-ui/icons/GitHub";
 import "react-toastify/dist/ReactToastify.css";
 import useStyles from "./Components/Upload/UploadStyles";
-import ConvertFile from "./Components/ConvertFile/ConvertFile";
 import Main from "./Components/Main/Main";
 
 const App = () => {
@@ -42,10 +41,8 @@ const App = () => {
         </Toolbar>
       </AppBar>
       <main style={{ marginBottom: "50px" }}>
-        <ConvertFile />
         <Main />
       </main>
-
       <footer className={classes.footer}>
         <Container
           style={{

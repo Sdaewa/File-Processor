@@ -50,14 +50,10 @@ const FileUpload = ({
 
   const handleNewFileUpload = (e) => {
     const { files: newFiles } = e.target;
-    console.log(files);
 
     let updatedFiles = addNewFiles(newFiles);
     setFiles(updatedFiles);
     callUpdateFilesCb(updatedFiles);
-    setTimeout(() => {
-      setFiles({});
-    }, 6000);
   };
 
   return (

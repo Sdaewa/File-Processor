@@ -17,6 +17,7 @@ import ModalEmail from "../Modal/ModalEmail";
 import FileDownloadRoundedIcon from "@mui/icons-material/FileDownloadRounded";
 import CompressRoundedIcon from "@mui/icons-material/CompressRounded";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
+import ConvertFile from "../ConvertFile/ConvertFile";
 
 const options = [
   {
@@ -41,6 +42,9 @@ const Main = () => {
     <>
       <CssBaseline />
       <Container maxWidth="md" component="main">
+        <div>
+          <ConvertFile />
+        </div>
         <div>
           <Divider variant="middle" style={{ marginBottom: "20px" }} />
         </div>

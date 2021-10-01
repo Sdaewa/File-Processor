@@ -14,10 +14,14 @@ const ConvertFile = () => {
   const [newInfo, setNewInfo] = useState({
     files: [],
   });
-  const [thereIsFile, seTthereIsFile] = useState(false);
+  const [thereIsFile, setThereIsFile] = useState(false);
 
   const updateUploadedFiles = (files) => {
     setNewInfo({ ...newInfo, files: files });
+  };
+
+  const deleteFileHandler = () => {
+    setThereIsFile(false);
   };
 
   const handleSubmit = (event) => {
@@ -46,7 +50,8 @@ const ConvertFile = () => {
           toast.success("No File selected !");
         } else {
           toast.success("Convertion successful!");
-          seTthereIsFile(true);
+          setThereIsFile(true);
+          console.log(thereIsFile);
         }
       })
       .catch((e) => {
@@ -64,19 +69,16 @@ const ConvertFile = () => {
         />
         <form>
           <Container maxWidth="md" component="main">
-            {/* <Grid item> */}
             <FileUpload updateFilesCb={updateUploadedFiles} multiple />
-            {/* </Grid> */}
             <Grid
               container
               direction="column"
               alignContent="center"
               style={{ padding: "25px 25px", marginBottom: "40px" }}>
-              <Grid item>{/* <ProgressBar value={isLoaded} /> */}</Grid>
               <Grid item>
                 <Box className={classes.box}>
                   {thereIsFile ? (
-                    <DeleteFile />
+                    <DeleteFile onDelete={deleteFileHandler} />
                   ) : (
                     <Button
                       variant="contained"
