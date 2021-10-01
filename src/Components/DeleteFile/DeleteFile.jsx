@@ -13,6 +13,7 @@ const DeleteFile = (props) => {
       .post("http://localhost:8000/delete")
       .then((res) => {
         ctx.setIsDisabled(true);
+        ctx.setFiles({});
         toast.success("Deletion successful");
       })
       .catch((e) => {

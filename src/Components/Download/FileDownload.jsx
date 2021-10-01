@@ -33,8 +33,10 @@ const FileDownload = () => {
         a.download = "newDocument.pdf";
         a.click();
         toast.success("Download Successful");
+        ctx.setFiles({});
         setTimeout(() => {
           setIsLoading(false);
+          ctx.setThereIsFile(false);
         }, 4000);
       })
       .catch((e) => {

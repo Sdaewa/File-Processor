@@ -1,7 +1,8 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useContext } from "react";
 import { Container, Button } from "@material-ui/core";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { StateContext } from "../../Store/StateContext";
 
 import useStyles from "./UploadStyles";
 
@@ -21,9 +22,9 @@ const FileUpload = ({
   maxFileSizeInBytes = DEFAULT_MAX_FILE_SIZE_IN_BYTES,
   ...otherProps
 }) => {
+  const ctx = useContext(StateContext);
   const classes = useStyles();
   const fileInputField = useRef();
-  const [files, setFiles] = useState({});
 
   const addNewFiles = (newFiles) => {
     for (let file of newFiles) {
@@ -31,10 +32,10 @@ const FileUpload = ({
         if (!otherProps.multiple) {
           return { file };
         }
-        files[file.name] = file;
+        ctx.files[file.name] = file;
       }
     }
-    return { ...files };
+    return { ...ctx.files };
   };
 
   const callUpdateFilesCb = (files) => {
@@ -43,16 +44,15 @@ const FileUpload = ({
   };
 
   const removeFile = (fileName) => {
-    delete files[fileName];
-    setFiles({ ...files });
-    callUpdateFilesCb({ ...files });
+    delete ctx.files[fileName];
+    ctx.setFiles({ ...ctx.files });
+    callUpdateFilesCb({ ...ctx.files });
   };
 
   const handleNewFileUpload = (e) => {
     const { files: newFiles } = e.target;
-
     let updatedFiles = addNewFiles(newFiles);
-    setFiles(updatedFiles);
+    // // setFiles(updatedFiles);
     callUpdateFilesCb(updatedFiles);
   };
 
@@ -83,20 +83,13 @@ const FileUpload = ({
         <article className={classes.filePreviewContainer}>
           <span>To Convert</span>
           <section className={classes.previewList}>
-            {Object.keys(files).map((fileName, index) => {
-              let file = files[fileName];
-              let isImageFile = file.type.split("/")[0] === "image";
+            {Object.keys(ctx.files).map((fileName, index) => {
+              let file = ctx.files[fileName];
+
               return (
                 <section key={fileName} className={classes.previewContainer}>
                   <div>
-                    <img
-                      className={classes.imgPreview}
-                      src={URL.createObjectURL(file)}
-                      alt=""
-                    />
-                    <div
-                      className={classes.fileMetada}
-                      isimagefile={isImageFile.toString()}>
+                    <div className={classes.fileMetada}>
                       <span>{file.name}</span>
                       <aside>
                         <span>{convertBytesToKB(file.size)} kb </span>
