@@ -28,6 +28,7 @@ const ConvertFile = () => {
 
   const deleteFileHandler = () => {
     ctx.setThereIsFile(false);
+    setNewInfo({ ...newInfo, files: [] });
   };
 
   const handleSubmit = (event) => {
