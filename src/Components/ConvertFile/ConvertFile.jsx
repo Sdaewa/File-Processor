@@ -4,7 +4,6 @@ import axios from "axios";
 import { Button, Container, Box, Grid } from "@material-ui/core";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-// import ProgressBar from "../UI/ProgressBar";
 import FileUpload from "../Upload/FileUpload";
 import DeleteFile from "../DeleteFile/DeleteFile";
 import useStyles from "../Upload/UploadStyles";
@@ -35,7 +34,7 @@ const ConvertFile = () => {
     for (let i = 0; i < newInfo.files.length; i++) {
       data.append("file", newInfo.files[i]);
     }
-    console.log(data);
+
     axios
       .post("http://localhost:8000/upload", data, {
         headers: {
@@ -46,16 +45,14 @@ const ConvertFile = () => {
       .then((res) => {
         console.log(res);
         if (res.data === "No File selected !") {
-          return toast.warning("No File selected !");
-        } else {
-          toast.success("Convertion successful!");
-          setThereIsFile(true);
           setIsConverting(false);
-          console.log(thereIsFile);
+          return toast.warning("No File selected !");
         }
+        setThereIsFile(true);
+        setIsConverting(false);
+        toast.success("Convertion successful!");
       })
       .catch((e) => {
-        console.log(e.message);
         setIsConverting(false);
         toast.error("Convertion fail");
       });

@@ -52,6 +52,7 @@ const FileDownload = () => {
           variant="contained"
           color="primary"
           type="button"
+          disabled={true}
           onClick={() => {
             setIsLoading(true);
             download();
