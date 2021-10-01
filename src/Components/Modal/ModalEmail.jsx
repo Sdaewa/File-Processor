@@ -76,17 +76,15 @@ const ModalEmail = () => {
     setOpen(false);
   };
 
-  const loadIcon = <ProgressBar value={isLoaded} />;
-
   return (
     <>
       <CssBaseline />
       {isLoading === true ? (
-        loadIcon
+        <ProgressBar value={isLoaded} />
       ) : (
         <Button
           variant="contained"
-          disabled={ctx.isDisabled}
+          disabled={ctx.thereIsFile !== true ? true : false}
           color="primary"
           onClick={handleClickOpen}>
           Enter email

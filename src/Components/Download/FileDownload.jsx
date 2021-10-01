@@ -54,7 +54,7 @@ const FileDownload = () => {
           variant="contained"
           color="primary"
           type="button"
-          disabled={ctx.isDisabled}
+          disabled={ctx.thereIsFile !== true ? true : false}
           onClick={() => {
             setIsLoading(true);
             download();

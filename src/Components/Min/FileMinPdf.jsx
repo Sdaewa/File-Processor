@@ -29,7 +29,6 @@ const FileDownload = () => {
         const blob = new Blob([data], { type: "application/pdf" });
         let url = window.URL.createObjectURL(blob);
         let a = document.createElement("a");
-        console.log(a);
         a.href = url;
         a.download = "newMinDocument.pdf";
         a.click();
@@ -39,25 +38,22 @@ const FileDownload = () => {
         }, 4000);
       })
       .catch((e) => {
-        console.log(e);
         setIsLoading(false);
         toast.error("Download Failed");
       });
   };
 
-  const loadIcon = <ProgressBar value={isLoaded} />;
-
   return (
     <>
       <CssBaseline />
       {isLoading === true ? (
-        loadIcon
+        <ProgressBar value={isLoaded} />
       ) : (
         <Button
           variant="contained"
           color="primary"
           type="button"
-          disabled={ctx.isDisabled}
+          disabled={ctx.thereIsFile !== true ? true : false}
           onClick={() => {
             setIsLoading(true);
             download();
