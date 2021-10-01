@@ -20,7 +20,6 @@ const FileDownload = () => {
         },
       })
       .then((res) => {
-        console.log(res);
         if (res.statusText === "BAD") {
           setIsLoading(false);
           console.log("error");

@@ -48,7 +48,6 @@ const ConvertFile = () => {
         },
       })
       .then((res) => {
-        console.log(res);
         if (res.data === "No File selected !") {
           ctx.setIsConverting(false);
           return toast.warning("No File selected !");
