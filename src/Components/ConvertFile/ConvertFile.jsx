@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 
 import { Button, Container, Box, Grid } from "@material-ui/core";
@@ -8,22 +8,26 @@ import FileUpload from "../Upload/FileUpload";
 import DeleteFile from "../DeleteFile/DeleteFile";
 import useStyles from "../Upload/UploadStyles";
 import Loader from "../UI/Loader";
+import { StateContext } from "../../Store/StateContext";
 
 const ConvertFile = () => {
+  const ctx = useContext(StateContext);
   const classes = useStyles();
   const [newInfo, setNewInfo] = useState({
     files: [],
   });
-  const [thereIsFile, setThereIsFile] = useState(false);
+
   const [isConverting, setIsConverting] = useState(false);
 
   const updateUploadedFiles = (files) => {
     setNewInfo({ ...newInfo, files: files });
+    if (newInfo) {
+      ctx.setIsDisabled(false);
+    }
   };
 
   const deleteFileHandler = () => {
-    setThereIsFile(false);
-    setNewInfo({ files: [] });
+    ctx.setThereIsFile(false);
   };
 
   const handleSubmit = (event) => {
@@ -45,10 +49,10 @@ const ConvertFile = () => {
       .then((res) => {
         console.log(res);
         if (res.data === "No File selected !") {
-          setIsConverting(false);
+          ctx.setIsConverting(false);
           return toast.warning("No File selected !");
         }
-        setThereIsFile(true);
+        ctx.setThereIsFile(true);
         setIsConverting(false);
         toast.success("Convertion successful!");
       })
@@ -59,7 +63,7 @@ const ConvertFile = () => {
   };
 
   const actionButtons = () => {
-    if (thereIsFile) {
+    if (ctx.thereIsFile) {
       return <DeleteFile onDelete={deleteFileHandler} />;
     } else {
       if (isConverting) {
@@ -70,6 +74,7 @@ const ConvertFile = () => {
             variant="contained"
             color="primary"
             type="submit"
+            disabled={ctx.isDisabled}
             onClick={handleSubmit}>
             Convert
           </Button>

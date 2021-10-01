@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 
 import {
@@ -13,8 +13,10 @@ import {
 import ProgressBar from "../UI/ProgressBar";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { StateContext } from "../../Store/StateContext";
 
 const ModalEmail = () => {
+  const ctx = useContext(StateContext);
   const [open, setOpen] = useState(false);
   const [email, setEmail] = useState("");
   const [isLoading, setIsLoading] = useState(false);
@@ -82,7 +84,11 @@ const ModalEmail = () => {
       {isLoading === true ? (
         loadIcon
       ) : (
-        <Button variant="contained" color="primary" onClick={handleClickOpen}>
+        <Button
+          variant="contained"
+          disabled={ctx.isDisabled}
+          color="primary"
+          onClick={handleClickOpen}>
           Enter email
         </Button>
       )}

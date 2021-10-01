@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import axios from "axios";
 
 import { toast } from "react-toastify";
@@ -6,7 +6,10 @@ import "react-toastify/dist/ReactToastify.css";
 import { Button, CssBaseline } from "@material-ui/core";
 import ProgressBar from "../UI/ProgressBar";
 
+import { StateContext } from "../../Store/StateContext";
+
 const FileDownload = () => {
+  const ctx = useContext(StateContext);
   const [isLoaded, setIsLoaded] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -54,6 +57,7 @@ const FileDownload = () => {
           variant="contained"
           color="primary"
           type="button"
+          disabled={ctx.isDisabled}
           onClick={() => {
             setIsLoading(true);
             download();

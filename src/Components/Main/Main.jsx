@@ -18,6 +18,7 @@ import FileDownloadRoundedIcon from "@mui/icons-material/FileDownloadRounded";
 import CompressRoundedIcon from "@mui/icons-material/CompressRounded";
 import SendRoundedIcon from "@mui/icons-material/SendRounded";
 import ConvertFile from "../ConvertFile/ConvertFile";
+import { StateProvider } from "../../Store/StateContext";
 
 const options = [
   {
@@ -42,51 +43,53 @@ const Main = () => {
     <>
       <CssBaseline />
       <Container maxWidth="md" component="main">
-        <div>
-          <ConvertFile />
-        </div>
-        <div>
-          <Divider variant="middle" style={{ marginBottom: "20px" }} />
-        </div>
-        <Grid
-          container
-          spacing={5}
-          alignItems="flex-end"
-          style={{ marginBottom: "20px" }}>
-          {options.map((opt) => (
-            <Grid item key={opt.title} xs={12} sm={6} md={4}>
-              <Card>
-                <CardHeader
-                  title={opt.title}
-                  titleTypographyProps={{ align: "center" }}
-                  subheaderTypographyProps={{
-                    align: "center",
-                  }}
-                />
-                <CardContent>
-                  <Box
-                    sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "baseline",
-                      mb: 2,
-                    }}>
-                    {opt.icon}
-                  </Box>
-                </CardContent>
-                <CardActions>
-                  <Grid
-                    container
-                    direction="column"
-                    alignContent="center"
-                    style={{ marginBottom: "20px" }}>
-                    <Grid item>{opt.comp}</Grid>
-                  </Grid>
-                </CardActions>
-              </Card>
-            </Grid>
-          ))}
-        </Grid>
+        <StateProvider>
+          <div>
+            <ConvertFile />
+          </div>
+          <div>
+            <Divider variant="middle" style={{ marginBottom: "20px" }} />
+          </div>
+          <Grid
+            container
+            spacing={5}
+            alignItems="flex-end"
+            style={{ marginBottom: "20px" }}>
+            {options.map((opt) => (
+              <Grid item key={opt.title} xs={12} sm={6} md={4}>
+                <Card>
+                  <CardHeader
+                    title={opt.title}
+                    titleTypographyProps={{ align: "center" }}
+                    subheaderTypographyProps={{
+                      align: "center",
+                    }}
+                  />
+                  <CardContent>
+                    <Box
+                      sx={{
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "baseline",
+                        mb: 2,
+                      }}>
+                      {opt.icon}
+                    </Box>
+                  </CardContent>
+                  <CardActions>
+                    <Grid
+                      container
+                      direction="column"
+                      alignContent="center"
+                      style={{ marginBottom: "20px" }}>
+                      <Grid item>{opt.comp}</Grid>
+                    </Grid>
+                  </CardActions>
+                </Card>
+              </Grid>
+            ))}
+          </Grid>
+        </StateProvider>
       </Container>
     </>
   );
