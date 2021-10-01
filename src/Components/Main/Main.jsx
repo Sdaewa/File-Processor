@@ -27,12 +27,12 @@ const options = [
   },
   {
     title: "Minimize PDF",
-    icon: <CompressRoundedIcon />,
+    icon: <CompressRoundedIcon fontSize="large" />,
     comp: <FileMinPdf />,
   },
   {
     title: "Send to email",
-    icon: <SendRoundedIcon />,
+    icon: <SendRoundedIcon fontSize="large" />,
     comp: <ModalEmail />,
   },
 ];

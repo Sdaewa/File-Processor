@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 import FileUpload from "../Upload/FileUpload";
 import DeleteFile from "../DeleteFile/DeleteFile";
 import useStyles from "../Upload/UploadStyles";
+import Loader from "../UI/Loader";
 
 const ConvertFile = () => {
   const classes = useStyles();
@@ -15,6 +16,7 @@ const ConvertFile = () => {
     files: [],
   });
   const [thereIsFile, setThereIsFile] = useState(false);
+  const [isConverting, setIsConverting] = useState(false);
 
   const updateUploadedFiles = (files) => {
     setNewInfo({ ...newInfo, files: files });
@@ -22,11 +24,12 @@ const ConvertFile = () => {
 
   const deleteFileHandler = () => {
     setThereIsFile(false);
+    setNewInfo({ files: [] });
   };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
+    setIsConverting(true);
     const data = new FormData();
 
     for (let i = 0; i < newInfo.files.length; i++) {
@@ -39,26 +42,45 @@ const ConvertFile = () => {
           // encoding: null,
           encoding: "binary",
         },
-        // onUploadProgress: (ProgressEvent) => {
-        //   setIsLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
-        // },
       })
-
       .then((res) => {
         console.log(res);
         if (res.data === "No File selected !") {
-          toast.success("No File selected !");
+          return toast.warning("No File selected !");
         } else {
           toast.success("Convertion successful!");
           setThereIsFile(true);
+          setIsConverting(false);
           console.log(thereIsFile);
         }
       })
       .catch((e) => {
         console.log(e.message);
+        setIsConverting(false);
         toast.error("Convertion fail");
       });
   };
+
+  const actionButtons = () => {
+    if (thereIsFile) {
+      return <DeleteFile onDelete={deleteFileHandler} />;
+    } else {
+      if (isConverting) {
+        return <Loader />;
+      } else {
+        return (
+          <Button
+            variant="contained"
+            color="primary"
+            type="submit"
+            onClick={handleSubmit}>
+            Convert
+          </Button>
+        );
+      }
+    }
+  };
+
   return (
     <Container className={classes.dropZone}>
       <div className="form-group">
@@ -76,19 +98,7 @@ const ConvertFile = () => {
               alignContent="center"
               style={{ padding: "25px 25px", marginBottom: "40px" }}>
               <Grid item>
-                <Box className={classes.box}>
-                  {thereIsFile ? (
-                    <DeleteFile onDelete={deleteFileHandler} />
-                  ) : (
-                    <Button
-                      variant="contained"
-                      color="primary"
-                      type="submit"
-                      onClick={handleSubmit}>
-                      Convert
-                    </Button>
-                  )}
-                </Box>
+                <Box className={classes.box}>{actionButtons()}</Box>
               </Grid>
             </Grid>
           </Container>
