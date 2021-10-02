@@ -50,6 +50,7 @@ const ModalEmail = () => {
         ctx.setFiles({});
         setTimeout(() => {
           setIsLoading(false);
+          ctx.setThereIsFile(false);
         }, 4000);
         setEmail("");
       })

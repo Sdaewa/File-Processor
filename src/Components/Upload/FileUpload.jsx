@@ -43,12 +43,6 @@ const FileUpload = ({
     updateFilesCb(filesAsArray);
   };
 
-  const removeFile = (fileName) => {
-    delete ctx.files[fileName];
-    ctx.setFiles({ ...ctx.files });
-    callUpdateFilesCb({ ...ctx.files });
-  };
-
   const handleNewFileUpload = (e) => {
     const { files: newFiles } = e.target;
     let updatedFiles = addNewFiles(newFiles);
@@ -93,10 +87,6 @@ const FileUpload = ({
                       <span>{file.name}</span>
                       <aside>
                         <span>{convertBytesToKB(file.size)} kb </span>
-                        <i
-                          className="fas fa-trash-alt"
-                          onClick={() => removeFile(fileName)}
-                        />
                       </aside>
                     </div>
                   </div>
