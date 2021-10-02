@@ -51,17 +51,10 @@ const ModalEmail = () => {
         setTimeout(() => {
           setIsLoading(false);
           ctx.setThereIsFile(false);
+          ctx.setIsDisabled(true);
         }, 4000);
         setEmail("");
       })
-      // .then((data) => {
-      //   console.log("data", data);
-      // alert(data.message);
-      // toast.success("Sending email successful");
-      // setTimeout(() => {
-      //   setIsLoading(false);
-      // }, 6000);
-      // })
       .catch((err) => {
         console.log(err);
         toast.error("Sending email failed");
@@ -116,7 +109,6 @@ const ModalEmail = () => {
           <Button onClick={handleClose} color="primary">
             Cancel
           </Button>
-
           <Button
             type="submit"
             onClick={() => {

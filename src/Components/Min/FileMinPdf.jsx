@@ -5,7 +5,6 @@ import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Button, CssBaseline } from "@material-ui/core";
 import ProgressBar from "../UI/ProgressBar";
-
 import { StateContext } from "../../Store/StateContext";
 
 const FileDownload = () => {
@@ -34,9 +33,10 @@ const FileDownload = () => {
         a.click();
         toast.success("Download Successful");
         ctx.setFiles({});
-        ctx.setThereIsFile(false);
         setTimeout(() => {
           setIsLoading(false);
+          ctx.setThereIsFile(false);
+          ctx.setIsDisabled(true);
         }, 4000);
       })
       .catch((e) => {

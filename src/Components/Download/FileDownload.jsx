@@ -36,6 +36,7 @@ const FileDownload = () => {
         setTimeout(() => {
           setIsLoading(false);
           ctx.setThereIsFile(false);
+          ctx.setIsDisabled(true);
         }, 4000);
       })
       .catch((e) => {
@@ -43,13 +44,11 @@ const FileDownload = () => {
       });
   };
 
-  const loadIcon = <ProgressBar value={isLoaded} />;
-
   return (
     <>
       <CssBaseline />
       {isLoading === true ? (
-        loadIcon
+        <ProgressBar value={isLoaded} />
       ) : (
         <Button
           variant="contained"

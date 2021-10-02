@@ -43,7 +43,6 @@ const ConvertFile = () => {
     axios
       .post("http://localhost:8000/upload", data, {
         headers: {
-          // encoding: null,
           encoding: "binary",
         },
       })
