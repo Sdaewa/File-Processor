@@ -43,6 +43,7 @@ const ConvertFile = () => {
     axios
       .post("http://localhost:8000/upload", data, {
         headers: {
+          "Content-Type": "multipart/form-data",
           encoding: "binary",
         },
       })
