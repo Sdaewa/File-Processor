@@ -43,22 +43,21 @@ const App = () => {
       <main style={{ marginBottom: "50px" }}>
         <Main />
       </main>
-      <footer className={classes.footer}>
-        <Container
-          style={{
-            margin: "25px auto",
-            padding: "25px auto",
-            width: "100%",
-            bottom: "0",
-            alignItems: "center",
-            position: "static",
-          }}>
+      <Container
+        style={{
+          margin: "25px auto",
+          padding: "25px auto",
+          width: "100%",
+          alignItems: "center",
+          position: "sticky",
+        }}>
+        <footer className={classes.footer}>
           <Typography align="center" variant="body1">
             Luis Ramirez
           </Typography>
           <Github />
-        </Container>
-      </footer>
+        </footer>
+      </Container>
     </>
   );
 };

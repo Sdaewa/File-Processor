@@ -59,10 +59,6 @@ const useStyles = makeStyles(() => ({
 
     "&:hover": {
       opacity: " 0.55",
-
-      // "${FileMetaData}": {
-      //   display: "flex",
-      // },
     },
 
     "& > div:first-of-type": {
@@ -82,12 +78,6 @@ const useStyles = makeStyles(() => ({
       width: "100%",
       padding: "0 0 0.4em",
     },
-  },
-  imgPreview: {
-    // padding: "100px",
-    borderRadius: "6px",
-    width: "100%",
-    height: " 100%",
   },
   fileMetada: {
     display: "flex",

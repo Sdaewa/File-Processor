@@ -7,7 +7,6 @@ import { StateContext } from "../../Store/StateContext";
 import useStyles from "./UploadStyles";
 
 const KILO_BYTES_PER_BYTE = 1000;
-const DEFAULT_MAX_FILE_SIZE_IN_BYTES = 50000000;
 
 const convertNestedObjectToArray = (nestedObj) =>
   Object.keys(nestedObj).map((key) => nestedObj[key]);
@@ -19,7 +18,6 @@ const FileUpload = ({
   updateFilesCb,
   handlerSubmit,
   onConvert,
-  maxFileSizeInBytes = DEFAULT_MAX_FILE_SIZE_IN_BYTES,
   ...otherProps
 }) => {
   const ctx = useContext(StateContext);
@@ -28,12 +26,10 @@ const FileUpload = ({
 
   const addNewFiles = (newFiles) => {
     for (let file of newFiles) {
-      if (file.size < maxFileSizeInBytes) {
-        if (!otherProps.multiple) {
-          return { file };
-        }
-        ctx.files[file.name] = file;
+      if (!otherProps.multiple) {
+        return { file };
       }
+      ctx.files[file.name] = file;
     }
     return { ...ctx.files };
   };
@@ -59,7 +55,7 @@ const FileUpload = ({
           hideProgressBar
         />
         <Container className={classes.fileUploadContainer}>
-          <p>Drag and drop your files anywhere</p>
+          <p>Drag and drop your DOC/DOCX/PAGES files anywhere</p>
           <Button variant="outlined" color="primary" type="button">
             <i className="fas fa-file-upload" />
             <span> Upload Files</span>
