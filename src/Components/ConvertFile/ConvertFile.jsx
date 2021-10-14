@@ -16,11 +16,15 @@ const ConvertFile = () => {
   const [newInfo, setNewInfo] = useState({
     files: [],
   });
-
   const [isConverting, setIsConverting] = useState(false);
+  const [isValid, setIsValid] = useState(false);
 
   const updateUploadedFiles = (files) => {
+    console.log(files[0].name.split(".")[1]);
     setNewInfo({ ...newInfo, files: files });
+    if (files[0].name.split(".")[1] === "pdf") {
+      setIsValid(true);
+    }
     if (newInfo) {
       ctx.setIsDisabled(false);
     }
@@ -49,7 +53,6 @@ const ConvertFile = () => {
       })
       .then((res) => {
         if (res.data === "No File selected !") {
-          ctx.setIsConverting(false);
           return toast.warning("No File selected !");
         }
         ctx.setThereIsFile(true);
@@ -63,7 +66,7 @@ const ConvertFile = () => {
   };
 
   const actionButtons = () => {
-    if (ctx.thereIsFile) {
+    if (ctx.thereIsFile || isValid) {
       return <DeleteFile onDelete={deleteFileHandler} />;
     } else {
       if (isConverting) {

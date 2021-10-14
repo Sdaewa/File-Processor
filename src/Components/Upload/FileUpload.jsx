@@ -36,6 +36,9 @@ const FileUpload = ({
 
   const callUpdateFilesCb = (files) => {
     const filesAsArray = convertNestedObjectToArray(files);
+    if (filesAsArray[0].name.split(".")[1]) {
+      toast.error("File type is not accepted");
+    }
     updateFilesCb(filesAsArray);
   };
 
