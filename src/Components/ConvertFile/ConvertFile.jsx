@@ -17,13 +17,13 @@ const ConvertFile = () => {
     files: [],
   });
   const [isConverting, setIsConverting] = useState(false);
-  const [isValid, setIsValid] = useState(false);
+  const [isValid, setIsValid] = useState(true);
 
   const updateUploadedFiles = (files) => {
     console.log(files[0].name.split(".")[1]);
     setNewInfo({ ...newInfo, files: files });
     if (files[0].name.split(".")[1] === "pdf") {
-      setIsValid(true);
+      setIsValid(false);
     }
     if (newInfo) {
       ctx.setIsDisabled(false);
@@ -66,7 +66,7 @@ const ConvertFile = () => {
   };
 
   const actionButtons = () => {
-    if (ctx.thereIsFile || isValid) {
+    if (ctx.thereIsFile) {
       return <DeleteFile onDelete={deleteFileHandler} />;
     } else {
       if (isConverting) {
@@ -77,7 +77,7 @@ const ConvertFile = () => {
             variant="contained"
             color="primary"
             type="submit"
-            disabled={ctx.isDisabled}
+            disabled={ctx.isDisabled || !isValid}
             onClick={handleSubmit}>
             Convert
           </Button>
