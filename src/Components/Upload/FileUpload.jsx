@@ -108,13 +108,17 @@ const FileUpload = ({
                           <span>{file.name}</span>
                           <span>{convertBytesToKB(file.size)} kb </span>
                           <aside>
-                            <i
-                              className="fas fa-trash-alt"
-                              onClick={() => {
-                                removeFile(fileName);
-                                ctx.setIsDisabled(true);
-                              }}
-                            />
+                            {ctx.thereIsFile ? (
+                              " "
+                            ) : (
+                              <i
+                                className="fas fa-trash-alt"
+                                onClick={() => {
+                                  removeFile(fileName);
+                                  ctx.setIsDisabled(true);
+                                }}
+                              />
+                            )}
                           </aside>
                         </div>
                       </div>
