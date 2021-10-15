@@ -52,11 +52,11 @@ const ConvertFile = () => {
         }
         ctx.setThereIsFile(true);
         setIsConverting(false);
-        toast.success("Convertion successful!");
+        toast.success("Convertion Successful");
       })
       .catch((e) => {
         setIsConverting(false);
-        toast.error("Convertion fail");
+        toast.error("Convertion Failed");
       });
   };
 

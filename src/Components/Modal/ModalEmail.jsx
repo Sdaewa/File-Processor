@@ -46,7 +46,7 @@ const ModalEmail = () => {
     })
       .then((res) => {
         console.log("response", res);
-        toast.success("Sending email successful");
+        toast.success("Email was sent");
         ctx.setFiles({});
         setTimeout(() => {
           setIsLoading(false);
@@ -57,7 +57,7 @@ const ModalEmail = () => {
       })
       .catch((err) => {
         console.log(err);
-        toast.error("Sending email failed");
+        toast.error("Could not send the email");
         ctx.setFiles({});
         ctx.setThereIsFile(false);
         setIsLoading(false);
