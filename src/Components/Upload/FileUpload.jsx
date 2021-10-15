@@ -24,21 +24,16 @@ const FileUpload = ({
   const classes = useStyles();
   const fileInputField = useRef();
   const [isValid, setIsValid] = useState(true);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   const addNewFiles = (newFiles) => {
     for (let file of newFiles) {
-      if (!otherProps.multiple) {
-        console.log(file);
-        return { file };
-      }
-
+      console.log("addednewfiles", newFiles);
       if (file.name.split(".")[1] === "pdf") {
         toast.error("File type is not accepted");
         return;
       }
       ctx.files[file.name] = file;
-
-      // console.log(ctx.files[file.name].name.split(".")[1]);
     }
     return { ...ctx.files };
   };
@@ -50,16 +45,22 @@ const FileUpload = ({
 
   const handleNewFileUpload = (e) => {
     const { files: newFiles } = e.target;
+    console.log("newfiles", newFiles);
+    console.log(e.target);
 
     let updatedFiles = addNewFiles(newFiles);
     // // setFiles(updatedFiles);
+    console.log("updatedFiles", updatedFiles);
     for (let file in updatedFiles) {
-      // console.log(file.split(".")[1]);
+      console.log("loop", updatedFiles);
       if (file.split(".")[1] === "pdf") {
         setIsValid(false);
         updateFilesCb([]);
       }
       callUpdateFilesCb(updatedFiles);
+    }
+    if (Object.keys(ctx.files).length > 0) {
+      setIsDisabled(true);
     }
   };
 
@@ -73,7 +74,11 @@ const FileUpload = ({
         />
         <Container className={classes.fileUploadContainer}>
           <p>Drag and drop your DOC/DOCX/PAGES files anywhere</p>
-          <Button variant="outlined" color="primary" type="button">
+          <Button
+            variant="outlined"
+            color="primary"
+            type="button"
+            disabled={isDisabled}>
             <i className="fas fa-file-upload" />
             <span> Upload Files</span>
           </Button>
@@ -81,8 +86,8 @@ const FileUpload = ({
             className={classes.input}
             type="file"
             ref={fileInputField}
-            title=""
             value=""
+            disabled={isDisabled}
             onChange={handleNewFileUpload}
             {...otherProps}
           />
