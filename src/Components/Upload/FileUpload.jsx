@@ -27,7 +27,6 @@ const FileUpload = ({
 
   const addNewFiles = (newFiles) => {
     for (let file of newFiles) {
-      console.log("addednewfiles", newFiles);
       if (file.name.split(".")[1] === "pdf") {
         toast.error("File type is not accepted");
         return;
