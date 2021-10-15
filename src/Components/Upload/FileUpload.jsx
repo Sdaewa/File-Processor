@@ -60,6 +60,7 @@ const FileUpload = ({
   const removeFile = (fileName) => {
     delete ctx.files[fileName];
     ctx.setFiles({ ...ctx.files });
+    ctx.setIsDisabledOnUp(false);
     callUpdateFilesCb({ ...ctx.files });
   };
 
@@ -105,15 +106,15 @@ const FileUpload = ({
                       <div>
                         <div className={classes.fileMetada}>
                           <span>{file.name}</span>
+                          <span>{convertBytesToKB(file.size)} kb </span>
                           <aside>
-                            <span>{convertBytesToKB(file.size)} kb </span>
-                            <aside>
-                              <span>{convertBytesToKB(file.size)} kb</span>
-                              <i
-                                className="fas fa-trash-alt"
-                                onClick={() => removeFile(fileName)}
-                              />
-                            </aside>
+                            <i
+                              className="fas fa-trash-alt"
+                              onClick={() => {
+                                removeFile(fileName);
+                                ctx.setIsDisabled(true);
+                              }}
+                            />
                           </aside>
                         </div>
                       </div>
