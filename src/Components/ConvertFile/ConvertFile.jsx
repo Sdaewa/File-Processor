@@ -17,19 +17,9 @@ const ConvertFile = () => {
     files: [],
   });
   const [isConverting, setIsConverting] = useState(false);
-  const [isValid, setIsValid] = useState(true);
 
   const updateUploadedFiles = (files) => {
     setNewInfo({ ...newInfo, files: files });
-    // if (files[0] === undefined) {
-    //   setNewInfo({});
-    //   return setIsValid(false);
-    // }
-    // if (files[0].name.split(".")[1] === "pdf") {
-    //   setNewInfo({});
-    //   return setIsValid(false);
-    // }
-    // console.log("not pdf", files[0].name.split(".")[1]);
     if (newInfo) {
       ctx.setIsDisabled(false);
     }
@@ -82,7 +72,7 @@ const ConvertFile = () => {
             variant="contained"
             color="primary"
             type="submit"
-            disabled={ctx.isDisabled || !isValid}
+            disabled={ctx.isDisabled}
             onClick={handleSubmit}>
             Convert
           </Button>

@@ -6,7 +6,6 @@ import "react-toastify/dist/ReactToastify.css";
 import ProgressBar from "../UI/ProgressBar";
 import { Button, CssBaseline } from "@material-ui/core";
 import { StateContext } from "../../Store/StateContext";
-import { saveAs, encodeBase64 } from "@progress/kendo-file-saver";
 
 const FileDownload = () => {
   const ctx = useContext(StateContext);
