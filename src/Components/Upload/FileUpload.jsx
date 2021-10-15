@@ -24,7 +24,6 @@ const FileUpload = ({
   const classes = useStyles();
   const fileInputField = useRef();
   const [isValid, setIsValid] = useState(true);
-  const [isDisabled, setIsDisabled] = useState(false);
 
   const addNewFiles = (newFiles) => {
     for (let file of newFiles) {
@@ -45,14 +44,9 @@ const FileUpload = ({
 
   const handleNewFileUpload = (e) => {
     const { files: newFiles } = e.target;
-    console.log("newfiles", newFiles);
-    console.log(e.target);
-
     let updatedFiles = addNewFiles(newFiles);
-    // // setFiles(updatedFiles);
-    console.log("updatedFiles", updatedFiles);
+
     for (let file in updatedFiles) {
-      console.log("loop", updatedFiles);
       if (file.split(".")[1] === "pdf") {
         setIsValid(false);
         updateFilesCb([]);
@@ -60,7 +54,7 @@ const FileUpload = ({
       callUpdateFilesCb(updatedFiles);
     }
     if (Object.keys(ctx.files).length > 0) {
-      setIsDisabled(true);
+      ctx.setIsDisabledOnUp(true);
     }
   };
 
@@ -78,7 +72,7 @@ const FileUpload = ({
             variant="outlined"
             color="primary"
             type="button"
-            disabled={isDisabled}>
+            disabled={ctx.isDisabledOnUp}>
             <i className="fas fa-file-upload" />
             <span> Upload Files</span>
           </Button>
@@ -87,7 +81,7 @@ const FileUpload = ({
             type="file"
             ref={fileInputField}
             value=""
-            disabled={isDisabled}
+            disabled={ctx.isDisabledOnUp}
             onChange={handleNewFileUpload}
             {...otherProps}
           />

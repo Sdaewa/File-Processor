@@ -114,6 +114,7 @@ const ModalEmail = () => {
             onClick={() => {
               setIsLoading(true);
               postEmail();
+              ctx.setIsDisabledOnUp(false);
             }}
             color="primary">
             Send

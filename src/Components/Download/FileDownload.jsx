@@ -83,6 +83,7 @@ const FileDownload = () => {
           disabled={ctx.thereIsFile !== true ? true : false}
           onClick={() => {
             setIsLoading(true);
+            ctx.setIsDisabledOnUp(false);
             download();
           }}>
           Download

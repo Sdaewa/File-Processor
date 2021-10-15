@@ -28,6 +28,7 @@ const DeleteFile = (props) => {
       color="error"
       onClick={() => {
         deleteHandler();
+        ctx.setIsDisabledOnUp(false);
         props.onDelete();
       }}>
       Delete
