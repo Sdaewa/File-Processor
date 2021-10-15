@@ -1,6 +1,5 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-
 import {
   Button,
   TextField,
@@ -13,6 +12,7 @@ import {
 import ProgressBar from "../UI/ProgressBar";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 import { StateContext } from "../../Store/StateContext";
 
 const ModalEmail = () => {
@@ -25,7 +25,6 @@ const ModalEmail = () => {
   const onChange = (e) => {
     e.preventDefault();
     const value = e.target.value;
-    console.log("value", value);
     setEmail(value);
   };
 
@@ -45,7 +44,6 @@ const ModalEmail = () => {
       },
     })
       .then((res) => {
-        console.log("response", res);
         toast.success("Email was sent");
         ctx.setFiles({});
         setTimeout(() => {
@@ -56,7 +54,6 @@ const ModalEmail = () => {
         setEmail("");
       })
       .catch((err) => {
-        console.log(err);
         toast.error("Could not send the email");
         ctx.setFiles({});
         ctx.setThereIsFile(false);

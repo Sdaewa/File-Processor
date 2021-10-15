@@ -2,8 +2,8 @@ import React, { useRef, useContext, useState } from "react";
 import { Container, Button } from "@material-ui/core";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { StateContext } from "../../Store/StateContext";
 
+import { StateContext } from "../../Store/StateContext";
 import useStyles from "./UploadStyles";
 
 const KILO_BYTES_PER_BYTE = 1000;
@@ -44,7 +44,6 @@ const FileUpload = ({
   const handleNewFileUpload = (e) => {
     const { files: newFiles } = e.target;
     let updatedFiles = addNewFiles(newFiles);
-
     for (let file in updatedFiles) {
       if (file.split(".")[1] === "pdf") {
         setIsValid(false);
@@ -52,6 +51,7 @@ const FileUpload = ({
       }
       callUpdateFilesCb(updatedFiles);
     }
+
     if (Object.keys(ctx.files).length > 0) {
       ctx.setIsDisabledOnUp(true);
     }
@@ -73,7 +73,7 @@ const FileUpload = ({
           hideProgressBar
         />
         <Container className={classes.fileUploadContainer}>
-          <p>Drag and drop your DOC/DOCX/PAGES files anywhere</p>
+          <p>Drag and drop your files anywhere</p>
           <Button
             variant="outlined"
             color="primary"

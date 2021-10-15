@@ -1,9 +1,9 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-
 import { Button, Container, Box, Grid } from "@material-ui/core";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+
 import FileUpload from "../Upload/FileUpload";
 import DeleteFile from "../DeleteFile/DeleteFile";
 import useStyles from "../Upload/UploadStyles";
@@ -35,11 +35,9 @@ const ConvertFile = () => {
     event.preventDefault();
     setIsConverting(true);
     const data = new FormData();
-
     for (let i = 0; i < newInfo.files.length; i++) {
       data.append("file", newInfo.files[i]);
     }
-
     axios
       .post("http://localhost:8000/upload", data, {
         headers: {
@@ -92,7 +90,7 @@ const ConvertFile = () => {
         />
         <form>
           <Container maxWidth="md" component="main">
-            <FileUpload updateFilesCb={updateUploadedFiles} multiple />
+            <FileUpload updateFilesCb={updateUploadedFiles} />
             <Grid
               container
               direction="column"

@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import ProgressBar from "../UI/ProgressBar";
 import { Button, CssBaseline } from "@material-ui/core";
+
 import { StateContext } from "../../Store/StateContext";
 
 const FileDownload = () => {
@@ -23,7 +23,6 @@ const FileDownload = () => {
       .then((res) => {
         if (res.statusText === "BAD") {
           setIsLoading(false);
-          console.log("error");
         }
 
         const link = document.createElement("a");

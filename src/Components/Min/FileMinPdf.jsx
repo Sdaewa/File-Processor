@@ -1,10 +1,10 @@
 import React, { useState, useContext } from "react";
 import axios from "axios";
-
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { Button, CssBaseline } from "@material-ui/core";
 import ProgressBar from "../UI/ProgressBar";
+
 import { StateContext } from "../../Store/StateContext";
 
 const FileDownload = () => {
@@ -23,7 +23,6 @@ const FileDownload = () => {
       .then((res) => {
         if (res.statusText === "bad") {
           setIsLoading(false);
-          console.log("error");
         }
         const link = document.createElement("a");
         // create a blobURI pointing to our Blob
