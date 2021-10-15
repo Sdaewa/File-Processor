@@ -57,6 +57,12 @@ const FileUpload = ({
     }
   };
 
+  const removeFile = (fileName) => {
+    delete ctx.files[fileName];
+    ctx.setFiles({ ...ctx.files });
+    callUpdateFilesCb({ ...ctx.files });
+  };
+
   return (
     <>
       <div className="form-group">
@@ -101,6 +107,13 @@ const FileUpload = ({
                           <span>{file.name}</span>
                           <aside>
                             <span>{convertBytesToKB(file.size)} kb </span>
+                            <aside>
+                              <span>{convertBytesToKB(file.size)} kb</span>
+                              <i
+                                className="fas fa-trash-alt"
+                                onClick={() => removeFile(fileName)}
+                              />
+                            </aside>
                           </aside>
                         </div>
                       </div>

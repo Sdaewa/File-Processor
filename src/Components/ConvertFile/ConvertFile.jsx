@@ -20,6 +20,7 @@ const ConvertFile = () => {
 
   const updateUploadedFiles = (files) => {
     setNewInfo({ ...newInfo, files: files });
+
     if (newInfo) {
       ctx.setIsDisabled(false);
     }
