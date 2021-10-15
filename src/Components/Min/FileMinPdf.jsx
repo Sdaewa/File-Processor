@@ -15,6 +15,7 @@ const FileDownload = () => {
   const download = () => {
     axios
       .get("http://localhost:8000/convertToMin", {
+        responseType: "blob",
         onDownloadProgress: (ProgressEvent) => {
           setIsLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
         },
@@ -24,13 +25,17 @@ const FileDownload = () => {
           setIsLoading(false);
           console.log("error");
         }
-        const data = new Buffer.from(res.data).toString("base64");
-        const blob = new Blob([data], { type: "application/pdf" });
-        let url = window.URL.createObjectURL(blob);
-        let a = document.createElement("a");
-        a.href = url;
-        a.download = "newMinDocument.pdf";
-        a.click();
+        const link = document.createElement("a");
+        // create a blobURI pointing to our Blob
+        link.href = URL.createObjectURL(res.data);
+        link.download = "newMinPdf";
+        // some browser needs the anchor to be in the doc
+        document.body.append(link);
+        link.click();
+        link.remove();
+        // in case the Blob uses a lot of memory
+        setTimeout(() => URL.revokeObjectURL(link.href), 7000);
+
         toast.success("Download Successful");
         ctx.setFiles({});
         setTimeout(() => {
