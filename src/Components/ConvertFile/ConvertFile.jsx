@@ -20,11 +20,16 @@ const ConvertFile = () => {
   const [isValid, setIsValid] = useState(true);
 
   const updateUploadedFiles = (files) => {
-    console.log(files[0].name.split(".")[1]);
     setNewInfo({ ...newInfo, files: files });
-    if (files[0].name.split(".")[1] === "pdf") {
-      setIsValid(false);
-    }
+    // if (files[0] === undefined) {
+    //   setNewInfo({});
+    //   return setIsValid(false);
+    // }
+    // if (files[0].name.split(".")[1] === "pdf") {
+    //   setNewInfo({});
+    //   return setIsValid(false);
+    // }
+    // console.log("not pdf", files[0].name.split(".")[1]);
     if (newInfo) {
       ctx.setIsDisabled(false);
     }

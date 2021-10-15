@@ -1,4 +1,4 @@
-import React, { useRef, useContext } from "react";
+import React, { useRef, useContext, useState } from "react";
 import { Container, Button } from "@material-ui/core";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -23,30 +23,44 @@ const FileUpload = ({
   const ctx = useContext(StateContext);
   const classes = useStyles();
   const fileInputField = useRef();
+  const [isValid, setIsValid] = useState(true);
 
   const addNewFiles = (newFiles) => {
     for (let file of newFiles) {
       if (!otherProps.multiple) {
+        console.log(file);
         return { file };
       }
+
+      if (file.name.split(".")[1] === "pdf") {
+        toast.error("File type is not accepted");
+        return;
+      }
       ctx.files[file.name] = file;
+
+      // console.log(ctx.files[file.name].name.split(".")[1]);
     }
     return { ...ctx.files };
   };
 
   const callUpdateFilesCb = (files) => {
-    const filesAsArray = convertNestedObjectToArray(files);
-    if (filesAsArray[0].name.split(".")[1]) {
-      toast.error("File type is not accepted");
-    }
+    let filesAsArray = convertNestedObjectToArray(files);
     updateFilesCb(filesAsArray);
   };
 
   const handleNewFileUpload = (e) => {
     const { files: newFiles } = e.target;
+
     let updatedFiles = addNewFiles(newFiles);
     // // setFiles(updatedFiles);
-    callUpdateFilesCb(updatedFiles);
+    for (let file in updatedFiles) {
+      // console.log(file.split(".")[1]);
+      if (file.split(".")[1] === "pdf") {
+        setIsValid(false);
+        updateFilesCb([]);
+      }
+      callUpdateFilesCb(updatedFiles);
+    }
   };
 
   return (
@@ -76,22 +90,25 @@ const FileUpload = ({
         <article className={classes.filePreviewContainer}>
           <span>To Convert</span>
           <section className={classes.previewList}>
-            {Object.keys(ctx.files).map((fileName, index) => {
-              let file = ctx.files[fileName];
-
-              return (
-                <section key={fileName} className={classes.previewContainer}>
-                  <div>
-                    <div className={classes.fileMetada}>
-                      <span>{file.name}</span>
-                      <aside>
-                        <span>{convertBytesToKB(file.size)} kb </span>
-                      </aside>
-                    </div>
-                  </div>
-                </section>
-              );
-            })}
+            {!isValid
+              ? ""
+              : Object.keys(ctx.files).map((fileName, index) => {
+                  let file = ctx.files[fileName];
+                  return (
+                    <section
+                      key={fileName}
+                      className={classes.previewContainer}>
+                      <div>
+                        <div className={classes.fileMetada}>
+                          <span>{file.name}</span>
+                          <aside>
+                            <span>{convertBytesToKB(file.size)} kb </span>
+                          </aside>
+                        </div>
+                      </div>
+                    </section>
+                  );
+                })}
           </section>
         </article>
       </div>
