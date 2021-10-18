@@ -31,7 +31,7 @@ const ModalEmail = () => {
   const postEmail = () => {
     axios({
       method: "POST",
-      url: "http://localhost:8000/sendByEmail",
+      url: "https://pacific-ravine-03339.herokuapp.com/sendByEmail",
 
       data: {
         emailAddress: email,

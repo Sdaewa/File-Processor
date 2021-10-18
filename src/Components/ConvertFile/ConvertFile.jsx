@@ -39,7 +39,7 @@ const ConvertFile = () => {
       data.append("file", newInfo.files[i]);
     }
     axios
-      .post("http://localhost:8000/upload", data, {
+      .post("https://pacific-ravine-03339.herokuapp.com/upload", data, {
         headers: {
           "Content-Type": "multipart/form-data",
           encoding: "binary",

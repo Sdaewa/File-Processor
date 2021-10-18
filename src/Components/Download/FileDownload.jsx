@@ -14,7 +14,7 @@ const FileDownload = () => {
 
   const download = () => {
     axios
-      .get("http://localhost:8000/downloadPdf", {
+      .get("https://pacific-ravine-03339.herokuapp.com/downloadPdf", {
         responseType: "blob",
         onDownloadProgress: (ProgressEvent) => {
           setIsLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
