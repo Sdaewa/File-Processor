@@ -19,8 +19,9 @@ const ConvertFile = () => {
   const [isConverting, setIsConverting] = useState(false);
 
   const updateUploadedFiles = (files) => {
-    setNewInfo({ ...newInfo, files: files });
-
+    const filesUrl = URL.createObjectURL(files[0]);
+    setNewInfo({ ...newInfo, files: filesUrl });
+    console.log(filesUrl);
     if (newInfo) {
       ctx.setIsDisabled(false);
     }
