@@ -19,9 +19,7 @@ const ConvertFile = () => {
   const [isConverting, setIsConverting] = useState(false);
 
   const updateUploadedFiles = (files) => {
-    const filesUrl = URL.createObjectURL(files[0]);
-    setNewInfo({ ...newInfo, files: filesUrl });
-    console.log(filesUrl);
+    setNewInfo({ ...newInfo, files: files });
     if (newInfo) {
       ctx.setIsDisabled(false);
     }
@@ -39,8 +37,9 @@ const ConvertFile = () => {
     for (let i = 0; i < newInfo.files.length; i++) {
       data.append("file", newInfo.files[i]);
     }
+
     axios
-      .post("https://pacific-ravine-03339.herokuapp.com/upload", data, {
+      .post("http://localhost:8080/upload", data, {
         headers: {
           "Content-Type": "multipart/form-data",
           encoding: "binary",

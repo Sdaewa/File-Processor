@@ -14,7 +14,7 @@ const FileDownload = () => {
 
   const download = () => {
     axios
-      .get("https://pacific-ravine-03339.herokuapp.com/convertToMin", {
+      .get("http://localhost:8080/convertToMin", {
         responseType: "blob",
         onDownloadProgress: (ProgressEvent) => {
           setIsLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
