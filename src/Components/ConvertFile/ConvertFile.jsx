@@ -19,6 +19,7 @@ const ConvertFile = () => {
   const [isConverting, setIsConverting] = useState(false);
 
   const updateUploadedFiles = (files) => {
+    console.log("files", files);
     setNewInfo({ ...newInfo, files: files });
     if (newInfo) {
       ctx.setIsDisabled(false);
@@ -30,19 +31,21 @@ const ConvertFile = () => {
     setNewInfo({ ...newInfo, files: [] });
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
+  const handleSubmit = (e) => {
+    e.preventDefault();
     setIsConverting(true);
     const data = new FormData();
-    for (let i = 0; i < newInfo.files.length; i++) {
-      data.append("file", newInfo.files[i]);
-    }
+
+    const reader = new FileReader();
+    reader.readAsDataURL(newInfo.files[0]);
+    reader.onloadend = () => {
+      data.append("file", reader.result);
+    };
 
     axios
       .post("http://localhost:8080/upload", data, {
         headers: {
           "Content-Type": "multipart/form-data",
-          encoding: "binary",
         },
       })
       .then((res) => {

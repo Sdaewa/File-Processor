@@ -24,11 +24,10 @@ const FileDownload = () => {
         if (res.statusText === "BAD") {
           setIsLoading(false);
         }
-
         const link = document.createElement("a");
         // create a blobURI pointing to our Blob
         link.href = URL.createObjectURL(res.data);
-        link.download = "newPdf";
+        link.download = "newPdf.pdf";
         // some browser needs the anchor to be in the doc
         document.body.append(link);
         link.click();
