@@ -42,10 +42,6 @@ const ConvertFile = () => {
       axios
         .post("http://localhost:8080/upload", { data: pdfData })
         .then((res) => {
-          console.log(res);
-          // if (res.data === "No File selected !") {
-          //   return toast.warning("No File selected !");
-          // }
           ctx.setThereIsFile(true);
           setIsConverting(false);
           toast.success("Convertion Successful");
