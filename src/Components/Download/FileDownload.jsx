@@ -15,18 +15,19 @@ const FileDownload = () => {
   const download = () => {
     axios
       .get("http://localhost:8080/downloadPdf", {
-        responseType: "blob",
         onDownloadProgress: (ProgressEvent) => {
           setIsLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
         },
       })
       .then((res) => {
+        console.log(res.data.url);
         if (res.statusText === "BAD") {
           setIsLoading(false);
         }
         const link = document.createElement("a");
         // create a blobURI pointing to our Blob
-        link.href = URL.createObjectURL(res.data);
+        // link.href = URL.createObjectURL(res);
+        link.href = res.data.url;
         link.download = "newPdf.pdf";
         // some browser needs the anchor to be in the doc
         document.body.append(link);

@@ -19,7 +19,6 @@ const ConvertFile = () => {
   const [isConverting, setIsConverting] = useState(false);
 
   const updateUploadedFiles = (files) => {
-    console.log("files", files);
     setNewInfo({ ...newInfo, files: files });
     if (newInfo) {
       ctx.setIsDisabled(false);
@@ -34,13 +33,14 @@ const ConvertFile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsConverting(true);
-
     const reader = new FileReader();
     reader.readAsDataURL(newInfo.files[0]);
     reader.onloadend = () => {
-      const pdfData = reader.result;
+      const docData = reader.result;
+      console.log(docData);
       axios
-        .post("http://localhost:8080/upload", { data: pdfData })
+        // passing wrong data as doc not pdfnev
+        .post("http://localhost:8080/upload", { data: docData })
         .then((res) => {
           ctx.setThereIsFile(true);
           setIsConverting(false);
