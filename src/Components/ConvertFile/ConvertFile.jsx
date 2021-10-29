@@ -34,32 +34,27 @@ const ConvertFile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsConverting(true);
-    const data = new FormData();
 
     const reader = new FileReader();
     reader.readAsDataURL(newInfo.files[0]);
     reader.onloadend = () => {
-      data.append("file", reader.result);
+      const pdfData = reader.result;
+      axios
+        .post("http://localhost:8080/upload", { data: pdfData })
+        .then((res) => {
+          console.log(res);
+          // if (res.data === "No File selected !") {
+          //   return toast.warning("No File selected !");
+          // }
+          ctx.setThereIsFile(true);
+          setIsConverting(false);
+          toast.success("Convertion Successful");
+        })
+        .catch((e) => {
+          setIsConverting(false);
+          toast.error("Convertion Failed");
+        });
     };
-
-    axios
-      .post("http://localhost:8080/upload", data, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      })
-      .then((res) => {
-        if (res.data === "No File selected !") {
-          return toast.warning("No File selected !");
-        }
-        ctx.setThereIsFile(true);
-        setIsConverting(false);
-        toast.success("Convertion Successful");
-      })
-      .catch((e) => {
-        setIsConverting(false);
-        toast.error("Convertion Failed");
-      });
   };
 
   const actionButtons = () => {
