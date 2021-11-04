@@ -14,7 +14,7 @@ const FileDownload = () => {
 
   const download = () => {
     axios
-      .get("http://localhost:8080/downloadPdf", {
+      .get("http://localhost:8080/convertToMin", {
         onDownloadProgress: (ProgressEvent) => {
           setIsLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
         },
@@ -24,7 +24,8 @@ const FileDownload = () => {
           setIsLoading(false);
         }
         const urlFile = res.data.url;
-        fetch(urlFile)
+        axios
+          .get(urlFile, { responseType: "arraybuffer" })
           .then((response) => response.blob())
           .then((blob) => {
             const link = document.createElement("a");
