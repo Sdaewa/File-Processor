@@ -30,7 +30,6 @@ const FileDownload = () => {
             const link = document.createElement("a");
             // create a blobURI pointing to our Blob
             link.href = URL.createObjectURL(blob);
-            // link.href = res.data.url;
             link.download = "newPdf.pdf";
             // some browser needs the anchor to be in the doc
             document.body.append(link);
@@ -48,7 +47,10 @@ const FileDownload = () => {
             }, 4000);
           });
       })
-      .catch((e) => {
+      .then(() => {
+        axios.post("http://localhost:8080/delete");
+      })
+      .catch(() => {
         toast.error("Download Failed");
       });
   };

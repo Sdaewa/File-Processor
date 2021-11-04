@@ -14,34 +14,38 @@ const FileDownload = () => {
 
   const download = () => {
     axios
-      .get("http://localhost:8080/convertToMin", {
-        responseType: "blob",
+      .get("http://localhost:8080/downloadPdf", {
         onDownloadProgress: (ProgressEvent) => {
           setIsLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
         },
       })
       .then((res) => {
-        if (res.statusText === "bad") {
+        if (res.statusText === "BAD") {
           setIsLoading(false);
         }
-        const link = document.createElement("a");
-        // create a blobURI pointing to our Blob
-        link.href = URL.createObjectURL(res.data);
-        link.download = "newMinPdf";
-        // some browser needs the anchor to be in the doc
-        document.body.append(link);
-        link.click();
-        link.remove();
-        // in case the Blob uses a lot of memory
-        setTimeout(() => URL.revokeObjectURL(link.href), 7000);
+        const urlFile = res.data.url;
+        fetch(urlFile)
+          .then((response) => response.blob())
+          .then((blob) => {
+            const link = document.createElement("a");
+            // create a blobURI pointing to our Blob
+            link.href = URL.createObjectURL(blob);
+            link.download = "newPdf.pdf";
+            // some browser needs the anchor to be in the doc
+            document.body.append(link);
+            link.click();
+            link.remove();
+            // in case the Blob uses a lot of memory
+            setTimeout(() => URL.revokeObjectURL(link.href), 7000);
 
-        toast.success("Download Successful");
-        ctx.setFiles({});
-        setTimeout(() => {
-          setIsLoading(false);
-          ctx.setThereIsFile(false);
-          ctx.setIsDisabled(true);
-        }, 4000);
+            toast.success("Download Successful");
+            ctx.setFiles({});
+            setTimeout(() => {
+              setIsLoading(false);
+              ctx.setThereIsFile(false);
+              ctx.setIsDisabled(true);
+            }, 4000);
+          });
       })
       .catch((e) => {
         setIsLoading(false);
