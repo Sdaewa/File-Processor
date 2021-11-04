@@ -33,24 +33,25 @@ const ConvertFile = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     setIsConverting(true);
-    const reader = new FileReader();
-    reader.readAsDataURL(newInfo.files[0]);
-    reader.onloadend = () => {
-      const docData = reader.result;
-      console.log(docData);
-      axios
-        // passing wrong data as doc not pdfnev
-        .post("http://localhost:8080/upload", { data: docData })
-        .then((res) => {
-          ctx.setThereIsFile(true);
-          setIsConverting(false);
-          toast.success("Convertion Successful");
-        })
-        .catch((e) => {
-          setIsConverting(false);
-          toast.error("Convertion Failed");
-        });
-    };
+    const file = newInfo.files[0];
+    console.log(file);
+    const formData = new FormData();
+    formData.append("file", file);
+
+    // passing wrong data as doc not pdfnev
+    axios
+      .post("http://localhost:8080/upload", formData)
+      .then((res) => {
+        console.log(res);
+        ctx.setThereIsFile(true);
+        setIsConverting(false);
+        toast.success("Convertion Successful");
+      })
+      .catch((e) => {
+        setIsConverting(false);
+        toast.error("Convertion Failed");
+      });
+    // };
   };
 
   const actionButtons = () => {
