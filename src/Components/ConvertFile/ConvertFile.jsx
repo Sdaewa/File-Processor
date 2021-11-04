@@ -34,24 +34,20 @@ const ConvertFile = () => {
     e.preventDefault();
     setIsConverting(true);
     const file = newInfo.files[0];
-    console.log(file);
     const formData = new FormData();
     formData.append("file", file);
 
-    // passing wrong data as doc not pdfnev
     axios
       .post("http://localhost:8080/upload", formData)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         ctx.setThereIsFile(true);
         setIsConverting(false);
         toast.success("Convertion Successful");
       })
-      .catch((e) => {
+      .catch(() => {
         setIsConverting(false);
         toast.error("Convertion Failed");
       });
-    // };
   };
 
   const actionButtons = () => {

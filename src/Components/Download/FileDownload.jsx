@@ -20,29 +20,33 @@ const FileDownload = () => {
         },
       })
       .then((res) => {
-        console.log(res.data.url);
         if (res.statusText === "BAD") {
           setIsLoading(false);
         }
-        const link = document.createElement("a");
-        // create a blobURI pointing to our Blob
-        // link.href = URL.createObjectURL(res);
-        link.href = res.data.url;
-        link.download = "newPdf.pdf";
-        // some browser needs the anchor to be in the doc
-        document.body.append(link);
-        link.click();
-        link.remove();
-        // in case the Blob uses a lot of memory
-        setTimeout(() => URL.revokeObjectURL(link.href), 7000);
+        const urlFile = res.data.url;
+        fetch(urlFile)
+          .then((response) => response.blob())
+          .then((blob) => {
+            const link = document.createElement("a");
+            // create a blobURI pointing to our Blob
+            link.href = URL.createObjectURL(blob);
+            // link.href = res.data.url;
+            link.download = "newPdf.pdf";
+            // some browser needs the anchor to be in the doc
+            document.body.append(link);
+            link.click();
+            link.remove();
+            // in case the Blob uses a lot of memory
+            setTimeout(() => URL.revokeObjectURL(link.href), 7000);
 
-        toast.success("Download Successful");
-        ctx.setFiles({});
-        setTimeout(() => {
-          setIsLoading(false);
-          ctx.setThereIsFile(false);
-          ctx.setIsDisabled(true);
-        }, 4000);
+            toast.success("Download Successful");
+            ctx.setFiles({});
+            setTimeout(() => {
+              setIsLoading(false);
+              ctx.setThereIsFile(false);
+              ctx.setIsDisabled(true);
+            }, 4000);
+          });
       })
       .catch((e) => {
         toast.error("Download Failed");
