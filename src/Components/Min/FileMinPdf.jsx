@@ -12,6 +12,10 @@ const FileDownload = () => {
   const [isLoaded, setIsLoaded] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
 
+  const regexFilter = new RegExp(
+    /((http[s]?|ftp):\/)?\/?([^:\/\s]+)((\/\w+)*\/)([\w\-\.]+[^#?\s]+)?/
+  );
+
   const download = () => {
     axios
       .get("http://localhost:8080/convertToMin", {
@@ -20,12 +24,14 @@ const FileDownload = () => {
         },
       })
       .then((res) => {
+        console.log(res.data);
         if (res.statusText === "BAD") {
           setIsLoading(false);
         }
-        const urlFile = res.data.url;
-        axios
-          .get(urlFile, { responseType: "arraybuffer" })
+        const urlFile = res.data.split("'")[1];
+        console.log(urlFile);
+
+        fetch(urlFile)
           .then((response) => response.blob())
           .then((blob) => {
             const link = document.createElement("a");
