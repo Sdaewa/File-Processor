@@ -48,6 +48,9 @@ const FileDownload = () => {
             }, 4000);
           });
       })
+      .then(() => {
+        axios.post("http://localhost:8080/delete");
+      })
       .catch((e) => {
         setIsLoading(false);
         toast.error("Download Failed");
