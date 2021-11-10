@@ -20,7 +20,6 @@ const FileDownload = () => {
         },
       })
       .then((res) => {
-        console.log(res.data);
         if (res.statusText === "BAD") {
           setIsLoading(false);
         }
@@ -32,13 +31,13 @@ const FileDownload = () => {
             const link = document.createElement("a");
             // create a blobURI pointing to our Blob
             link.href = URL.createObjectURL(blob);
-            link.download = "newPdf.pdf";
+            link.download = "miniPdf.pdf";
             // some browser needs the anchor to be in the doc
             document.body.append(link);
             link.click();
             link.remove();
             // in case the Blob uses a lot of memory
-            setTimeout(() => URL.revokeObjectURL(link.href), 7000);
+            setTimeout(() => URL.revokeObjectURL(link.href), 10000);
 
             toast.success("Download Successful");
             ctx.setFiles({});
