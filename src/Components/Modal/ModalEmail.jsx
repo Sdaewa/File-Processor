@@ -53,6 +53,9 @@ const ModalEmail = () => {
         }, 4000);
         setEmail("");
       })
+      .then(() => {
+        axios.post("http://localhost:8080/delete");
+      })
       .catch((err) => {
         toast.error("Could not send the email");
         ctx.setFiles({});
