@@ -10,7 +10,7 @@ const DeleteFile = (props) => {
   const ctx = useContext(StateContext);
   const deleteHandler = () => {
     axios
-      .post("http://localhost:8080/delete")
+      .post("https://compressor-server.herokuapp.com/delete")
       .then((res) => {
         ctx.setIsDisabled(true);
         ctx.setFiles({});

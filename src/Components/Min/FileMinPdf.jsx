@@ -14,7 +14,7 @@ const FileDownload = () => {
 
   const download = () => {
     axios
-      .get("http://localhost:8080/convertToMin", {
+      .get("https://compressor-server.herokuapp.com/convertToMin", {
         onDownloadProgress: (ProgressEvent) => {
           setIsLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
         },
@@ -49,7 +49,7 @@ const FileDownload = () => {
           });
       })
       .then(() => {
-        axios.post("http://localhost:8080/delete");
+        axios.post("https://compressor-server.herokuapp.com/delete");
       })
       .catch((e) => {
         setIsLoading(false);

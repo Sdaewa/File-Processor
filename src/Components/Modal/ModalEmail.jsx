@@ -31,7 +31,7 @@ const ModalEmail = () => {
   const postEmail = () => {
     axios({
       method: "POST",
-      url: "http://localhost:8080/sendByEmail",
+      url: "https://compressor-server.herokuapp.com/sendByEmail",
 
       data: {
         emailAddress: email,
@@ -54,7 +54,7 @@ const ModalEmail = () => {
         setEmail("");
       })
       .then(() => {
-        axios.post("http://localhost:8080/delete");
+        axios.post("https://compressor-server.herokuapp.com/delete");
       })
       .catch((err) => {
         toast.error("Could not send the email");

@@ -14,7 +14,7 @@ const FileDownload = () => {
 
   const download = () => {
     axios
-      .get("http://localhost:8080/downloadPdf", {
+      .get("https://compressor-server.herokuapp.com/downloadPdf", {
         onDownloadProgress: (ProgressEvent) => {
           setIsLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
         },
@@ -48,7 +48,7 @@ const FileDownload = () => {
           });
       })
       .then(() => {
-        axios.post("http://localhost:8080/delete");
+        axios.post("https://compressor-server.herokuapp.com/delete");
       })
       .catch(() => {
         toast.error("Download Failed");
