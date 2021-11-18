@@ -36,7 +36,7 @@ const App = () => {
         }}>
         <Toolbar>
           <Typography variant="h6" color="inherit" noWrap>
-            PDF Processor
+            File Processor
           </Typography>
         </Toolbar>
       </AppBar>
