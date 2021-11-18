@@ -38,7 +38,6 @@ const ConvertFile = () => {
     formData.append("file", file);
 
     axios
-      // .post("https://compressor-server.herokuapp.com/upload", formData)
       .post("https://processor-server.herokuapp.com/upload", formData)
       .then(() => {
         ctx.setThereIsFile(true);

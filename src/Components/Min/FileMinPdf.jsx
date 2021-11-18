@@ -48,6 +48,9 @@ const FileDownload = () => {
             }, 4000);
           });
       })
+      .then(() => {
+        axios.post("https://processor-server.herokuapp.com/delete");
+      })
       .catch((e) => {
         setIsLoading(false);
         toast.error("Download Failed");
