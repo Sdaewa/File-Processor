@@ -1,5 +1,5 @@
 {
-  "name": "PDF_processor",
+  "name": "File_processor",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
