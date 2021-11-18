@@ -14,7 +14,7 @@ const FileDownload = () => {
 
   const download = () => {
     axios
-      .get("http://localhost:8080/convertToMin", {
+      .get("https://processor-server.herokuapp.com/convertToMin", {
         onDownloadProgress: (ProgressEvent) => {
           setIsLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
         },

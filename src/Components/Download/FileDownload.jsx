@@ -14,8 +14,7 @@ const FileDownload = () => {
 
   const download = () => {
     axios
-      // .get("https://compressor-server.herokuapp.com/downloadPdf", {
-      .get("http://localhost:8080/downloadPdf", {
+      .get("https://processor-server.herokuapp.com/downloadPdf", {
         onDownloadProgress: (ProgressEvent) => {
           setIsLoaded((ProgressEvent.loaded / ProgressEvent.total) * 100);
         },
