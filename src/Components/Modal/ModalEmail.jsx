@@ -53,7 +53,6 @@ const ModalEmail = () => {
         }, 4000);
         setEmail("");
       })
-
       .catch((err) => {
         toast.error("Could not send the email");
         ctx.setFiles({});
