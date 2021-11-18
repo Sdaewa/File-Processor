@@ -1,5 +1,5 @@
 {
-  "name": "File_processor",
+  "name": "file_processor",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
